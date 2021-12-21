@@ -1,7 +1,9 @@
 import { writable, readable, Readable, Writable } from "svelte/store";
 import type Item from './objects/item';
 
-export const currentPage: Writable<string> = writable('index');
+export let currentPage: Writable<number> = writable(0);
+export let winHeight = writable(0);
+export let winWidth = writable(0);
 
 const level1: string[] = ['abc', 'cde', 'def'];
 const level2: string[] = ['114', '514', '1919'];
