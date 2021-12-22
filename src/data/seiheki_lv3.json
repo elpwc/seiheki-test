@@ -1,0 +1,21 @@
+{
+  "config": {
+    "level": 3,
+    "title": "魔王",
+    "desc": "现实中几乎没有，在常人看来触犯法律/违背伦理/非常怪异但还不至于guro的程度的xp",
+    "color": "rgb(255, 255, 255)"
+  },
+  "template": [{ "title": "", "score": 0, "desc": "" }],
+  "seihekis": [
+    {
+      "title": "",
+      "score": 1,
+      "desc": ""
+    },
+    {
+      "title": "",
+      "score": 2,
+      "desc": ""
+    }
+  ]
+}

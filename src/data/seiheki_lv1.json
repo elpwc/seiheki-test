@@ -1,8 +1,8 @@
 {
   "config": {
     "level": 1,
-    "title": "清新",
-    "desc": "",
+    "title": "人类",
+    "desc": "被广泛接受，随便一位年上亲戚说不定也喜欢的程度的xp",
     "color": "rgb(255, 255, 255)"
   },
   "template": [{ "title": "", "score": 0, "desc": "" }],
