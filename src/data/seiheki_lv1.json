@@ -3,7 +3,7 @@
     "level": 1,
     "title": "人类",
     "desc": "被广泛接受，随便一位年上亲戚说不定也喜欢的程度的xp",
-    "color": "rgb(255, 255, 255)"
+    "color": "#47c99e"
   },
   "template": [{ "title": "", "score": 0, "desc": "" }],
   "seihekis": [

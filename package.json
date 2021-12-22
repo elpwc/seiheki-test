@@ -13,6 +13,7 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^2.0.0",
+    "@types/lodash": "^4.14.178",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
@@ -28,6 +29,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "animate.css": "^4.1.1",
     "gsap": "^3.9.0",
+    "lodash": "^4.17.21",
     "sirv-cli": "^1.0.0"
   }
 }

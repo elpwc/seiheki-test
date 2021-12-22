@@ -3,12 +3,12 @@
     "level": 2,
     "title": "勇者",
     "desc": "在社会上部分存在，但会被部分庶民评价为变态的程度的xp",
-    "color": "rgb(255, 255, 255)"
+    "color": "#c9ba47"
   },
   "template": [{ "title": "", "score": 0, "desc": "" }],
   "seihekis": [
     {
-      "title": "",
+      "title": "待完成",
       "score": 1,
       "desc": ""
     },

@@ -2,18 +2,17 @@
   import type Seiheki from './objects/seiheki';
   import { SeihekiBuilder } from './objects/seiheki';
   import Card from './Card.svelte';
-  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, selected, score_sum, seiheki_data, currentPage_s } from './stores';
+  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, selected, scoreSum_s, seiheki_data, currentPage_s, level_data } from './stores';
   import SeihekiShow from './SeihekiShow.svelte';
   import gsap from 'gsap';
   import { onMount } from 'svelte';
   import Home from './Home.svelte';
-
   import test_data from './data/_safe.json';
-  import seiheki_lv1 from './data/seiheki_lv1.json';
 
-  const safe_mode = true; // office developping mode
+  import seiheki_json from './dataLoader';
+  import { LevelBuilder } from './objects/level';
 
-  let update = true;
+  const safe_mode = false; // office developping mode
 
   onMount(async () => {
     winHeight_s.set(window.innerHeight);
@@ -24,11 +23,14 @@
         seiheki_data.push(SeihekiBuilder(seiheki.title, 1, seiheki.score, seiheki.desc));
       });
     } else {
-      seiheki_lv1.seihekis.forEach((seiheki) => {
-        seiheki_data.push(SeihekiBuilder(seiheki.title, 1, seiheki.score, seiheki.desc));
+      seiheki_json.forEach((level_d, level: number) => {
+        // @ts-ignore
+        level_data.push(LevelBuilder(level_d.config.title, level + 1, level_d.config.color, level_d.config.desc));
+        level_d.seihekis.forEach((seiheki) => {
+          seiheki_data.push(SeihekiBuilder(seiheki.title, level + 1, seiheki.score, seiheki.desc));
+        });
       });
     }
-    update = !update;
   });
 
   window.addEventListener('resize', () => {
@@ -42,8 +44,32 @@
   let currentSeihekiPage: number = 0;
   let currentPage: string = '';
 
+  let backgroundColor: string = '#f8f8f8';
+
+  let scoreSum: number = 0;
+
+  scoreSum_s.subscribe((v) => {
+    scoreSum = v;
+  });
+
   currentPage_s.subscribe((v) => {
     currentPage = v;
+    switch (v) {
+      case 'home':
+        backgroundColor = '#f8f8f8';
+        break;
+      case 'select':
+        backgroundColor = '#47c99e';
+        break;
+      case 'about':
+        backgroundColor = '#f8f8f8';
+        break;
+      case 'complete':
+        backgroundColor = '#f8f8f8';
+        break;
+      default:
+        break;
+    }
   });
 
   winWidth_s.subscribe((v) => {
@@ -53,9 +79,26 @@
     w_height = v;
   });
 
+  const change_bg = async (to: string) => {
+    gsap.to('.bg', {
+      duration: 1,
+      ease: 'none',
+      backgroundColor: to,
+    });
+  };
+
   let last_page = 0;
+  let last_level = 0;
   currentSeihekiPage_s.subscribe((v) => {
     last_page = currentSeihekiPage;
+    if (seiheki_data.length > 0 && last_level !== seiheki_data[v]?.level) {
+      // @ts-ignore
+      backgroundColor = seiheki_json[seiheki_data[v]?.level - 1].config.color;
+      change_bg(backgroundColor);
+    }
+
+    last_level = seiheki_data[v]?.level;
+
     currentSeihekiPage = v;
     if (last_page > currentSeihekiPage) {
       gsap.from('.card1', {
@@ -106,7 +149,7 @@
 </script>
 
 <main>
-  <div class="page bg" style="z-index: 0;" />
+  <div class="page bg" style={`z-index: 0; background-color: ${backgroundColor}`} />
 
   <div class="page" style="z-index: 1;">
     {#if currentPage === 'home'}
@@ -126,10 +169,10 @@
     {:else if currentPage === 'select'}
       <div>
         <Card className={`card1`} left={-w_width}>
-          <SeihekiShow data={seiheki_data[currentSeihekiPage]} />
+          <SeihekiShow color={backgroundColor} data={seiheki_data[currentSeihekiPage]} />
         </Card>
         <Card className={`card2`} left={0}>
-          <SeihekiShow data={seiheki_data[currentSeihekiPage]} />
+          <SeihekiShow color={backgroundColor} data={seiheki_data[currentSeihekiPage]} />
         </Card>
       </div>
     {:else}
@@ -146,6 +189,7 @@
             currentSeihekiPage_s.set(currentSeihekiPage - 1);
           } else {
             currentPage_s.set('home');
+            backgroundColor = '#f8f8f8';
           }
         }}
       >
@@ -159,7 +203,7 @@
         {/if}
       </div>
 
-      <div class="header-item">{`${score_sum}分`}</div>
+      <div class="header-item">{`${scoreSum}'`}</div>
 
       <div class="header-item">
         {`${currentSeihekiPage + 1} / ${seiheki_data.length}`}
@@ -200,6 +244,5 @@
   }
 
   .bg {
-    background-color: aquamarine;
   }
 </style>

@@ -2,8 +2,8 @@
   import type Seiheki from './objects/seiheki';
   import { SeihekiBuilder } from './objects/seiheki';
   export let data: Seiheki = SeihekiBuilder('', 0, 0);
-
-  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, seiheki_data } from './stores';
+  export let color: string = '';
+  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, seiheki_data, scoreSum_s } from './stores';
 
   let currentSeihekiPage: number = 0;
   currentSeihekiPage_s.subscribe((v) => {
@@ -12,7 +12,8 @@
 
   const button_text: string[][] = [[], ['不能接受', '接受 or 喜欢'], ['不能接受', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢']];
 
-  const btn_onclick = () => {
+  const btn_onclick = (i: number) => {
+    scoreSum_s.update((n) => n + i + 1);
     if (currentSeihekiPage < seiheki_data.length - 1) currentSeihekiPage_s.set(currentSeihekiPage + 1);
   };
 </script>
@@ -22,7 +23,13 @@
   <div class="bottomdiv" style={device === 'desktop' ? 'padding: 0 35%' : ''}>
     <div class="btnlist">
       {#each new Array(data.score + 1) as _, i}
-        <button class="selectbtn" on:click={btn_onclick}>{button_text[data.score][i]}</button>
+        <button
+          class="selectbtn"
+          style={`color: ${color};`}
+          on:click={() => {
+            btn_onclick(i);
+          }}>{button_text[data.score][i]}</button
+        >
       {/each}
     </div>
   </div>
@@ -58,7 +65,7 @@
     font-size: 30px;
     border: none;
     border-radius: 5px;
-    color: rgb(71, 201, 158);
+    /*color: rgb(71, 201, 158);*/
     transition: 200ms;
     width: 95%;
   }
