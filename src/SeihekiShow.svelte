@@ -10,25 +10,19 @@
     currentPage_v = _;
   });
 
-  const button_text: string[][] = [[],
-    ['不能接受', '接受 or 喜欢'],
-    ['不能接受', '接受', '喜欢'],
-    ['不能接受', '无所谓', '接受', '喜欢'],
-    ['不能接受', '无所谓', '接受', '喜欢'],
-  ];
+  const button_text: string[][] = [[], ['不能接受', '接受 or 喜欢'], ['不能接受', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢']];
+
+  const btn_onclick = () => {
+    currentPage.set(currentPage_v + 1);
+  };
 </script>
 
 <div class="box">
-
-  <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data.title.length))*3}px`}>{data.title}</p>
-  <div class="bottomdiv" style={device === 'desktop'?'padding: 0 35%':''}>
+  <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data.title.length)) * 3}px`}>{data.title}</p>
+  <div class="bottomdiv" style={device === 'desktop' ? 'padding: 0 35%' : ''}>
     <div class="btnlist">
       {#each new Array(data.score + 1) as _, i}
-        <button class='selectbtn'
-          on:click={() => {
-            currentPage.set(currentPage_v + 1);
-          }}
-        >{button_text[data.score][i]}</button>
+        <button class="selectbtn" on:click={btn_onclick}>{button_text[data.score][i]}</button>
       {/each}
     </div>
   </div>
@@ -52,7 +46,10 @@
     height: 45%;
   }
   .btnlist {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
   }
   .selectbtn {
     margin: 5px 10px;
@@ -62,8 +59,18 @@
     border: none;
     border-radius: 5px;
     color: rgb(71, 201, 158);
+    transition: 200ms;
+    width: 95%;
   }
-  .selectbtn:hover{
-    color: rgb(96, 245, 195);
+
+  @media (any-hover: hover) {
+    .selectbtn:hover {
+      color: rgb(99, 236, 190);
+      width: 105%;
+    }
+  }
+
+  .selectbtn:active {
+    width: 90%;
   }
 </style>
