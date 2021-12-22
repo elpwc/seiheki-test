@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { afterUpdate, beforeUpdate, onDestroy, onMount } from "svelte";
-import App from "./App.svelte";
-	import { currentPage, lists, winHeight, winWidth } from "./stores";
+	import { currentSeihekiPage_s, winHeight_s, winWidth_s } from "./stores";
 	onMount(async () => {});
 
 	onDestroy(() => {});
@@ -15,10 +14,10 @@ import App from "./App.svelte";
 	export let className: string = '';
 	let height: number = 0;
 	let width: number = 0;
-	winWidth.subscribe((_) => {
+	winWidth_s.subscribe((_) => {
 		width = _;
 	});
-	winHeight.subscribe((_) => {
+	winHeight_s.subscribe((_) => {
 		height = _;
 	});
 </script>

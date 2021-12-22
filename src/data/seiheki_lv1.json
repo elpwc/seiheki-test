@@ -1,4 +1,10 @@
 {
+  "config": {
+    "level": 1,
+    "title": "清新",
+    "desc": "",
+    "color": "rgb(255, 255, 255)"
+  },
   "template": [{ "title": "", "score": 0, "desc": "" }],
   "seihekis": [
     {

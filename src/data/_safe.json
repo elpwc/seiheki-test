@@ -1,0 +1,31 @@
+{
+  "config": {
+    "level": 1,
+    "title": "SAFE",
+    "desc": "",
+    "color": "rgb(255, 255, 255)"
+  },
+  "template": [{ "title": "", "score": 0, "desc": "" }],
+  "seihekis": [
+    {
+      "title": "项目1",
+      "score": 1,
+      "desc": "项目1是项目1"
+    },
+    {
+      "title": "项目2",
+      "score": 2,
+      "desc": "啊"
+    },
+    {
+      "title": "项目3",
+      "score": 3,
+      "desc": "项目3项目3项目3项目3项目3项目3项目3项目3"
+    },
+    {
+      "title": "项目4",
+      "score": 4,
+      "desc": ""
+    }
+  ]
+}

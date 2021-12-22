@@ -1,0 +1,21 @@
+{
+  "config": {
+    "level": 0,
+    "title": "",
+    "desc": "",
+    "color": "rgb(255, 255, 255)"
+  },
+  "template": [{ "title": "", "score": 0, "desc": "" }],
+  "seihekis": [
+    {
+      "title": "",
+      "score": 1,
+      "desc": ""
+    },
+    {
+      "title": "",
+      "score": 2,
+      "desc": ""
+    }
+  ]
+}

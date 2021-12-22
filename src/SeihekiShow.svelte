@@ -3,17 +3,17 @@
   import { SeihekiBuilder } from './objects/seiheki';
   export let data: Seiheki = SeihekiBuilder('', 0, 0);
 
-  import { currentPage, winHeight, winWidth, device } from './stores';
+  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, seiheki_data } from './stores';
 
-  let currentPage_v: number = 0;
-  currentPage.subscribe((_) => {
-    currentPage_v = _;
+  let currentSeihekiPage: number = 0;
+  currentSeihekiPage_s.subscribe((v) => {
+    currentSeihekiPage = v;
   });
 
   const button_text: string[][] = [[], ['不能接受', '接受 or 喜欢'], ['不能接受', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢']];
 
   const btn_onclick = () => {
-    currentPage.set(currentPage_v + 1);
+    if (currentSeihekiPage < seiheki_data.length - 1) currentSeihekiPage_s.set(currentSeihekiPage + 1);
   };
 </script>
 
