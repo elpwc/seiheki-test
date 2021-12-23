@@ -3,7 +3,7 @@ import type Level from './objects/level';
 import type Seiheki from './objects/seiheki';
 
 export let currentPage_s: Writable<string> = writable('home'); //home about select complete
-export let currentSeihekiPage_s: Writable<number> = writable(-1);
+export let currentSeihekiPage_s: Writable<number> = writable(0);
 export let winHeight_s = writable(0);
 export let winWidth_s = writable(0);
 

@@ -85,65 +85,73 @@
       duration: 1,
       ease: 'none',
       backgroundColor: to,
+      onComplete: () => {
+        backgroundColor = to;
+      },
     });
   };
 
   let last_page = 0;
-  let last_level = 0;
+  let last_level = 0,
+    current_level = 0;
   currentSeihekiPage_s.subscribe((v) => {
     last_page = currentSeihekiPage;
-    if (seiheki_data.length > 0 && last_level !== seiheki_data[v]?.level) {
-      // @ts-ignore
-      backgroundColor = seiheki_json[seiheki_data[v]?.level - 1].config.color;
-      change_bg(backgroundColor);
+    current_level = seiheki_data[v]?.level;
+
+    if (seiheki_data.length > 0 && last_level !== current_level) {
+      change_bg(seiheki_json[current_level - 1].config.color);
     }
 
     last_level = seiheki_data[v]?.level;
 
-    currentSeihekiPage = v;
-    if (last_page > currentSeihekiPage) {
+    if (last_page > v) {
+      currentSeihekiPage = v;
       gsap.from('.card1', {
-        duration: 1,
+        duration: 0.8,
         left: -w_width,
         ease: 'elastic.out(1, 0.3)',
       });
-      gsap.to('.card1', {
-        duration: 1,
-        left: 0,
-        ease: 'elastic.out(1, 0.3)',
-      });
       gsap.from('.card2', {
-        duration: 1,
+        duration: 0.8,
         left: 0,
         ease: 'elastic.out(1, 0.3)',
-      });
-      gsap.to('.card2', {
-        duration: 1,
-        left: w_width,
-        ease: 'elastic.out(1, 0.3)',
-        onComplete: () => {},
+        onComplete: () => {
+          // reset
+          gsap.to('.card1', {
+            duration: 0.5,
+            left: 0,
+            ease: 'elastic.out(1, 0.3)',
+          });
+          gsap.to('.card2', {
+            duration: 0.5,
+            left: w_width,
+            ease: 'elastic.out(1, 0.3)',
+          });
+        },
       });
     } else {
-      gsap.from('.card1', {
-        duration: 1,
+      currentSeihekiPage = v;
+      gsap.from('.card0', {
+        duration: 0.8,
         left: 0,
         ease: 'elastic.out(1, 0.3)',
       });
-      gsap.to('.card1', {
-        duration: 1,
-        left: -w_width,
-        ease: 'elastic.out(1, 0.3)',
-      });
-      gsap.from('.card2', {
-        duration: 1,
+      gsap.from('.card1', {
+        duration: 0.8,
         left: w_width,
         ease: 'elastic.out(1, 0.3)',
-      });
-      gsap.to('.card2', {
-        duration: 1,
-        left: 0,
-        ease: 'elastic.out(1, 0.3)',
-        onComplete: () => {},
+        onComplete: () => {
+          gsap.to('.card0', {
+            duration: 0.5,
+            left: -w_width,
+            ease: 'elastic.out(1, 0.3)',
+          });
+          gsap.to('.card1', {
+            duration: 0.5,
+            left: 0,
+            ease: 'elastic.out(1, 0.3)',
+          });
+        },
       });
     }
   });
@@ -168,11 +176,14 @@
       </div>
     {:else if currentPage === 'select'}
       <div>
-        <Card className={`card1`} left={-w_width}>
+        <Card className={`card0`} left={-w_width}>
+          <SeihekiShow color={backgroundColor} data={seiheki_data[currentSeihekiPage === 0 ? 0 : currentSeihekiPage - 1]} />
+        </Card>
+        <Card className={`card1`} left={0}>
           <SeihekiShow color={backgroundColor} data={seiheki_data[currentSeihekiPage]} />
         </Card>
-        <Card className={`card2`} left={0}>
-          <SeihekiShow color={backgroundColor} data={seiheki_data[currentSeihekiPage]} />
+        <Card className={`card2`} left={w_width}>
+          <SeihekiShow color={backgroundColor} data={seiheki_data[currentSeihekiPage >= seiheki_data.length - 1 ? seiheki_data.length - 1 : currentSeihekiPage + 1]} />
         </Card>
       </div>
     {:else}

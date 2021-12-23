@@ -1,7 +1,7 @@
 <script lang="ts">
   import type Seiheki from './objects/seiheki';
   import { SeihekiBuilder } from './objects/seiheki';
-  export let data: Seiheki = SeihekiBuilder('', 0, 0);
+  export let data: Seiheki | undefined = SeihekiBuilder('', 0, 0);
   export let color: string = '';
   import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, seiheki_data, scoreSum_s } from './stores';
 
@@ -19,23 +19,23 @@
 </script>
 
 <div class="box">
-  <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data.title.length)) * 3}px`}>{data.title}</p>
+  <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data?.title.length)) * 3}px`}>{data?.title}</p>
   <p class="quote-p">
-    {#if data.description !== ''}
+    {#if data?.description !== ''}
       <span class="quote">“</span>
-      <span class="desc">{data.description}</span>
+      <span class="desc">{data?.description}</span>
       <span class="quote">„</span>
     {/if}
   </p>
   <div class="bottomdiv" style={device === 'desktop' ? 'padding: 0 35%' : ''}>
     <div class="btnlist">
-      {#each new Array(data.score + 1) as _, i}
+      {#each new Array(data?.score + 1) as _, i}
         <button
           class="selectbtn"
           style={`color: ${color};`}
           on:click={() => {
             btn_onclick(i);
-          }}>{button_text[data.score][i]}</button
+          }}>{button_text[data?.score][i]}</button
         >
       {/each}
     </div>
