@@ -30,6 +30,8 @@
     "animate.css": "^4.1.1",
     "gsap": "^3.9.0",
     "lodash": "^4.17.21",
+    "pixiv-api-client": "^0.25.0",
+    "pixiv-app-api": "^1.2.1",
     "sirv-cli": "^1.0.0"
   }
 }
