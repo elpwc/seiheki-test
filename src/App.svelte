@@ -12,6 +12,7 @@
   import seiheki_json from './dataLoader';
   import { LevelBuilder } from './objects/level';
   import About from './About.svelte';
+  import utils from './utils';
 
   const safe_mode = false; // office developping mode
 
@@ -30,6 +31,7 @@
         level_d.seihekis.forEach((seiheki) => {
           seiheki_data.push(SeihekiBuilder(seiheki.title, level + 1, seiheki.score, seiheki.desc));
         });
+        console.log(114);
       });
     }
   });
@@ -97,8 +99,27 @@
   currentSeihekiPage_s.subscribe((v) => {
     last_page = currentSeihekiPage;
     current_level = seiheki_data[v]?.level;
-
+    console.log(v, seiheki_data, seiheki_data[v]);
+    // level changed
     if (seiheki_data.length > 0 && last_level !== current_level) {
+      console.log(last_level, current_level);
+      const tl = gsap.timeline();
+      tl.to('.level-tip', {
+        duration: 0.5,
+        right: '-50px',
+        ease: 'back.out(1.7)',
+      });
+      tl.to(
+        '.level-tip',
+        {
+          duration: 0.5,
+          right: '-50px',
+          ease: 'back.out(1.7)',
+          reversed: true,
+        },
+        5
+      );
+
       change_bg(seiheki_json[current_level - 1].config.color);
     }
 
@@ -159,6 +180,13 @@
 
 <main>
   <div class="page bg" style={`z-index: 0; background-color: ${backgroundColor}`} />
+
+  <div class="level-tip">
+    <p style={`color: ${backgroundColor}; font-size: 20px; font-weight: bold; margin-right: 10px; width: 220px; margin-top: 10px;`}>
+      {`${utils.convert_to_rome(level_data[current_level - 1]?.level)}级xp`}<br />{`"${level_data[current_level - 1]?.title}"`}
+    </p>
+    <p style={`color: ${backgroundColor}; font-size: 10px; width: 400px;`}>{level_data[current_level - 1]?.description}</p>
+  </div>
 
   <div class="page" style="z-index: 1;">
     {#if currentPage === 'home' || currentPage === 'about'}
@@ -255,5 +283,19 @@
   }
 
   .bg {
+  }
+  .level-tip {
+    position: fixed;
+    right: -250px;
+    padding-right: 50px;
+    z-index: 5;
+    top: 10%;
+    width: 200px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
   }
 </style>
