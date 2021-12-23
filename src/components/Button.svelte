@@ -13,7 +13,7 @@
   }
   @media (any-hover: hover) {
     .mybutton:hover {
-      width: 36vw;
+      width: 37vw;
     }
   }
   .mybutton:active{
