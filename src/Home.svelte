@@ -9,10 +9,9 @@
     start_clicked = true;
     gsap.to('#chong', {
       duration: 0.5,
-      width: 1000,
-      height: 1000,
-      borderRadius: 1000,
-      backgroundColor: 'white',
+      width: 1100,
+      height: 1100,
+      borderRadius: 1100,
       ease: 'power4.out',
       onComplete: () => {
         currentPage_s.set('select');
@@ -64,7 +63,8 @@
 
     gsap.to('#start_blue', {
       duration: 0.2,
-      left: '7%',
+      left: '8%',
+      height: '29%',
       ease: CustomEase.create(
         'custom',
         'M0,0 C0,0 0.183,0.888 0.212,0.888 0.212,0.921 0.379,-0.007 0.38,0.026 0.408,0.026 0.489,0.822 0.518,0.822 0.518,0.855 0.627,-0.001 0.628,0.032 0.656,0.032 0.799,0.868 0.828,0.868 0.828,0.901 1,0 1,0 '
@@ -74,7 +74,8 @@
     });
     gsap.to('#start_red', {
       duration: 0.2,
-      left: '11%',
+      left: '12%',
+      height: '32%',
       ease: CustomEase.create(
         'custom',
         'M0,0 C0,0 0.183,0.888 0.212,0.888 0.212,0.921 0.379,-0.007 0.38,0.026 0.408,0.026 0.489,0.822 0.518,0.822 0.518,0.855 0.627,-0.001 0.628,0.032 0.656,0.032 0.799,0.868 0.828,0.868 0.828,0.901 1,0 1,0 '
@@ -128,8 +129,8 @@
     <div id="chong" style="background-color: #47c99e;" on:click|once={chong_onclick}>
       <div style="z-index: 1;">START</div>
       {#if !start_clicked}
-        <div id="start_blue" style="z-index: 0;color: #50e1ff; top:31%; left: 9%;">START</div>
-        <div id="start_red" style="z-index: 0;color: #ff6767; top:32%; left: 10%;">START</div>
+        <div id="start_blue" style="z-index: 0;color: #82eaff; top:30%; left: 9%;">START</div>
+        <div id="start_red" style="z-index: 0;color: #ff8686; top:31%; left: 10%;">START</div>
       {/if}
     </div>
 
