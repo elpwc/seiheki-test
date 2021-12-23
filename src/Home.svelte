@@ -13,9 +13,17 @@
       height: 1100,
       borderRadius: 1100,
       ease: 'power4.out',
+      bottom: '-120%', 
       onComplete: () => {
         currentPage_s.set('select');
         currentSeihekiPage_s.set(0);
+      },
+    });
+    gsap.to('#chong div', {
+      duration: 0.5,
+      opacity: 0,
+      ease: 'power4.out',
+      onComplete: () => {
       },
     });
   };
