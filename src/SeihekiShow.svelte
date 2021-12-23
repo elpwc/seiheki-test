@@ -20,6 +20,13 @@
 
 <div class="box">
   <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data.title.length)) * 3}px`}>{data.title}</p>
+  <p>
+    {#if data.description !== ''}
+      <span class="quote">“</span>
+      <span class="desc">{data.description}</span>
+      <span class="quote">„</span>
+    {/if}
+  </p>
   <div class="bottomdiv" style={device === 'desktop' ? 'padding: 0 35%' : ''}>
     <div class="btnlist">
       {#each new Array(data.score + 1) as _, i}
@@ -36,6 +43,14 @@
 </div>
 
 <style>
+  .quote {
+    font-size: 200%;
+    margin: 0 10px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .desc {
+    font-style: italic;
+  }
   .box {
     width: 100%;
     height: 100%;

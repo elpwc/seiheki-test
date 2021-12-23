@@ -11,6 +11,7 @@
 
   import seiheki_json from './dataLoader';
   import { LevelBuilder } from './objects/level';
+  import About from './About.svelte';
 
   const safe_mode = false; // office developping mode
 
@@ -152,15 +153,14 @@
   <div class="page bg" style={`z-index: 0; background-color: ${backgroundColor}`} />
 
   <div class="page" style="z-index: 1;">
-    {#if currentPage === 'home'}
+    {#if currentPage === 'home' || currentPage === 'about'}
       <div>
         <Card left={0}>
           <Home />
+          {#if currentPage === 'about'}
+            <About />
+          {/if}
         </Card>
-      </div>
-    {:else if currentPage === 'about'}
-      <div>
-        <Card left={0}>about</Card>
       </div>
     {:else if currentPage === 'complete'}
       <div>

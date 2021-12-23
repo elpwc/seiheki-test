@@ -1,6 +1,7 @@
 <script lang="ts">
   import gsap, { CustomEase } from 'gsap/all';
   import { onMount } from 'svelte';
+  import About from './About.svelte';
   import { currentPage_s, winHeight_s, winWidth_s, currentSeihekiPage_s } from './stores';
 
   let start_clicked: boolean = false;
@@ -13,7 +14,7 @@
       height: 1100,
       borderRadius: 1100,
       ease: 'power4.out',
-      bottom: '-120%', 
+      bottom: '-120%',
       onComplete: () => {
         currentPage_s.set('select');
         currentSeihekiPage_s.set(0);
@@ -23,10 +24,14 @@
       duration: 0.5,
       opacity: 0,
       ease: 'power4.out',
-      onComplete: () => {
-      },
+      onComplete: () => {},
     });
   };
+
+  let currentPage = 'home';
+  currentPage_s.subscribe((v) => {
+    currentPage = v;
+  });
 
   let winheight = 0,
     winwidth = 0;
@@ -98,14 +103,14 @@
   <div>
     <p class="title">
       性癖等级测试器<br />
-      <span style="font-size: 10px; font-weight: normal;">Author <i>wniko</i> 2022 ver 0.0.1.0</span>
+      <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver 0.0.1.0</span>
     </p>
     <div>
       <button
         class="top-button"
         on:click={() => {
           currentPage_s.set('about');
-        }}>About</button
+        }}>说明</button
       >
       <button
         class="top-button"
@@ -120,8 +125,17 @@
             /></svg
           ></span
         >
-        Github</button
-      >
+        Github
+        <span style="text-align: right; color: darkgray;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+            <path
+              fill-rule="evenodd"
+              d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+            />
+            <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+          </svg></span
+        >
+      </button>
     </div>
     <div class="tip">
       <p>点下面按钮开始测试捏</p>
@@ -175,6 +189,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
   }
   #chong {
     color: white;
