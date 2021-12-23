@@ -6,12 +6,12 @@
 
   onMount(async () => {
     gsap.from('#bg', {
-      duration: 1,
+      duration: 0.5,
       opacity: 0,
       ease: 'none',
     });
     gsap.from('.modal', {
-      duration: 1,
+      duration: 0.5,
       opacity: 0,
       top: '100%',
       ease: 'power3.out',
@@ -28,15 +28,16 @@
     <p>说明</p>
     <hr />
     <p>懒得写东西 摸了</p>
+    <p>具体请点进右边gayhub下拉看说明</p>
     <Button
       on:click={() => {
         gsap.to('#bg', {
-          duration: 1,
+          duration: 0.3,
           opacity: 0,
           ease: 'none',
         });
         gsap.to('.modal', {
-          duration: 1,
+          duration: 0.3,
           opacity: 0,
           top: '100%',
           ease: 'power3.out',
@@ -65,7 +66,7 @@
     top: 30%;
     left: 20%;
     width: 60%;
-    height: 30%;
+    height: fit-content;
     background-color: white;
     z-index: 1;
     border-radius: 10px;

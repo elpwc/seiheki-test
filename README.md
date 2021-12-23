@@ -14,8 +14,9 @@ svelte框架练手作・开发中
 |5|?????|包含了重度Guro，几乎让任何一个人都会感到恶心的程度的xp|食粪, 烹饪, 肢解, 斩首, etc|
 
 ## 🚀开发目标
-1. 完成测试后，根据做出的选项从pixiv拉取相关tag的色图显示。
+1. 完成测试后，根据做出的选项从pixiv拉取相关tag的色图送给大家()
 2. 分数存入数据库，对比显示排名（？？？？好怪喔
 
 ## 🚩初期预览：  
-![alt 开发中的预览](./readme_resources/screenshot.png)
+![alt 开发中的预览-home](./readme_resources/home.png)
+![alt 开发中的预览-select](./readme_resources/ntr.png)

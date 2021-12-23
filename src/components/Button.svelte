@@ -9,5 +9,15 @@
     border: 1px solid darkgray;
     width: 35vw;
     border-radius: 10px;
+    transition: 0.2s;
+  }
+  @media (any-hover: hover) {
+    .mybutton:hover {
+      width: 36vw;
+    }
+  }
+  .mybutton:active{
+    background-color: gray;
+    width: 33vw;
   }
 </style>

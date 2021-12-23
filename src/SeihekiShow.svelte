@@ -20,7 +20,7 @@
 
 <div class="box">
   <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data.title.length)) * 3}px`}>{data.title}</p>
-  <p>
+  <p class="quote-p">
     {#if data.description !== ''}
       <span class="quote">“</span>
       <span class="desc">{data.description}</span>
@@ -59,6 +59,7 @@
     width: 100%;
     margin-top: 15%;
     font-weight: bold;
+    margin-bottom: 0;
   }
   .bottomdiv {
     position: absolute;
@@ -94,5 +95,8 @@
 
   .selectbtn:active {
     width: 90%;
+  }
+  .quote-p {
+    margin-top: 0;
   }
 </style>

@@ -2,6 +2,7 @@
   import gsap, { CustomEase } from 'gsap/all';
   import { onMount } from 'svelte';
   import About from './About.svelte';
+  import Button from './components/Button.svelte';
   import { currentPage_s, winHeight_s, winWidth_s, currentSeihekiPage_s } from './stores';
 
   let start_clicked: boolean = false;
@@ -106,14 +107,12 @@
       <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver 0.0.1.0</span>
     </p>
     <div>
-      <button
-        class="top-button"
+      <Button
         on:click={() => {
           currentPage_s.set('about');
-        }}>说明</button
+        }}>说明</Button
       >
-      <button
-        class="top-button"
+      <Button
         on:click={() => {
           window.open('https://github.com/elpwc/seiheki-test', '_blank');
         }}
@@ -125,7 +124,7 @@
             /></svg
           ></span
         >
-        Github
+        Gayhub
         <span style="text-align: right; color: darkgray;">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
             <path
@@ -135,7 +134,7 @@
             <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
           </svg></span
         >
-      </button>
+      </Button>
     </div>
     <div class="tip">
       <p>点下面按钮开始测试捏</p>
@@ -215,11 +214,5 @@
     border-radius: 220px;
     position: absolute;
     z-index: 0;
-  }
-  .top-button {
-    background-color: white;
-    border: 1px solid darkgray;
-    width: 35vw;
-    border-radius: 10px;
   }
 </style>
