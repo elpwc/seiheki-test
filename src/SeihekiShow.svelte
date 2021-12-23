@@ -3,7 +3,7 @@
   import { SeihekiBuilder } from './objects/seiheki';
   export let data: Seiheki | undefined = SeihekiBuilder('', 0, 0);
   export let color: string = '';
-  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, seiheki_data, scoreSum_s } from './stores';
+  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, seiheki_data, scoreSum_s, currentPage_s, selected } from './stores';
 
   let currentSeihekiPage: number = 0;
   currentSeihekiPage_s.subscribe((v) => {
@@ -13,8 +13,13 @@
   const button_text: string[][] = [[], ['不能接受', '接受 or 喜欢'], ['不能接受', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢']];
 
   const btn_onclick = (i: number) => {
-    scoreSum_s.update((n) => n + i + 1);
-    if (currentSeihekiPage < seiheki_data.length - 1) currentSeihekiPage_s.set(currentSeihekiPage + 1);
+    scoreSum_s.update((n) => n + i);
+    selected.push([data?.title, data?.score, i]);
+    if (currentSeihekiPage < seiheki_data.length - 1) {
+      currentSeihekiPage_s.set(currentSeihekiPage + 1);
+    } else {
+      currentPage_s.set('complete');
+    }
   };
 </script>
 

@@ -14,6 +14,8 @@
   import About from './About.svelte';
   import utils from './utils';
 
+  import Result from './Result.svelte';
+
   const safe_mode = false; // office developping mode
 
   onMount(async () => {
@@ -200,7 +202,7 @@
       </div>
     {:else if currentPage === 'complete'}
       <div>
-        <Card left={0}>complete</Card>
+        <Card left={0}><Result /></Card>
       </div>
     {:else if currentPage === 'select'}
       <div>
