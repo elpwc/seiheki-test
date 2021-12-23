@@ -9,7 +9,7 @@ export let winWidth_s = writable(0);
 
 export let scoreSum_s = writable(0);
 
-export let selected: [string,number, number][] = []; // seiheki, score, selected score
+export let selected: [string, number, number][] = []; // seiheki, score, selected score
 export let seiheki_data: Seiheki[] = [];
 export let level_data: Level[] = [];
 

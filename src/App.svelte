@@ -33,7 +33,6 @@
         level_d.seihekis.forEach((seiheki) => {
           seiheki_data.push(SeihekiBuilder(seiheki.title, level + 1, seiheki.score, seiheki.desc));
         });
-        console.log(114);
       });
     }
   });
@@ -71,6 +70,7 @@
         break;
       case 'complete':
         backgroundColor = '#f8f8f8';
+        change_bg('#f8f8f8');
         break;
       default:
         break;
@@ -95,29 +95,28 @@
     });
   };
 
-  let last_page = 0;
+  let last_page = -1;
   let last_level = 0,
     current_level = 0;
   currentSeihekiPage_s.subscribe((v) => {
     last_page = currentSeihekiPage;
     current_level = seiheki_data[v]?.level;
-    console.log(v, seiheki_data, seiheki_data[v]);
     // level changed
     if (seiheki_data.length > 0 && last_level !== current_level) {
-      console.log(last_level, current_level);
       const tl = gsap.timeline();
-      tl.to('.level-tip', {
+      tl.to('.leveltip', {
         duration: 0.5,
         right: '-50px',
         ease: 'back.out(1.7)',
       });
       tl.to(
-        '.level-tip',
+        '.leveltip',
         {
           duration: 0.5,
           right: '-50px',
           ease: 'back.out(1.7)',
           reversed: true,
+          onComplete: () => {},
         },
         5
       );
@@ -126,6 +125,25 @@
     }
 
     last_level = seiheki_data[v]?.level;
+
+    if (v === 0) {
+      const tl2 = gsap.timeline();
+      tl2.to('.scoretip', {
+        duration: 0.5,
+        right: '-50px',
+        ease: 'back.out(1.7)',
+      });
+      tl2.to(
+        '.scoretip',
+        {
+          duration: 0.5,
+          right: '-50px',
+          ease: 'back.out(1.7)',
+          reversed: true,
+        },
+        5
+      );
+    }
 
     if (last_page > v) {
       currentSeihekiPage = v;
@@ -154,6 +172,7 @@
       });
     } else {
       currentSeihekiPage = v;
+
       gsap.from('.card0', {
         duration: 0.8,
         left: 0,
@@ -183,11 +202,23 @@
 <main>
   <div class="page bg" style={`z-index: 0; background-color: ${backgroundColor}`} />
 
-  <div class="level-tip">
+  <div class="tipbox leveltip">
     <p style={`color: ${backgroundColor}; font-size: 20px; font-weight: bold; margin-right: 10px; width: 220px; margin-top: 10px;`}>
       {`${utils.convert_to_rome(level_data[current_level - 1]?.level)}级xp`}<br />{`"${level_data[current_level - 1]?.title}"`}
     </p>
     <p style={`color: ${backgroundColor}; font-size: 10px; width: 400px;`}>{level_data[current_level - 1]?.description}</p>
+  </div>
+
+  <div class="tipbox scoretip" style="top: 23%;">
+    <p style={`color: black; font-size: 10px; margin-right: 10px; width: 500px; margin-top: 10px;`}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path
+          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+        />
+      </svg>
+      提示：评分是指<b>对相关作品的接受程度</b>，而不是自身能经历的程度。
+    </p>
   </div>
 
   <div class="page" style="z-index: 1;">
@@ -286,12 +317,11 @@
 
   .bg {
   }
-  .level-tip {
+  .tipbox {
     position: fixed;
     right: -250px;
     padding-right: 50px;
     z-index: 5;
-    top: 10%;
     width: 200px;
     height: fit-content;
     background-color: white;
@@ -299,5 +329,8 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
+  }
+  .leveltip {
+    top: 10%;
   }
 </style>
