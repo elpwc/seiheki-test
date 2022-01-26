@@ -13,6 +13,8 @@
 
 require './pixiv_api_php/PixivBase.php';
 
+//todo 引入composer 安装Curl
+
 class PixivAppAPI extends PixivBase
 {
     /**
