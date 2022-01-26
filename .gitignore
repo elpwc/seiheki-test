@@ -3,6 +3,4 @@
 
 .DS_Store
 
-pixiv_account_info.json
-
-pixiv-app-api
+/src/pixiv_api_php/Curl/
