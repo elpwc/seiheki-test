@@ -12,6 +12,11 @@
   <p>具体请点进右边gayhub下拉看说明</p>
   <Button
     on:click={() => {
+      currentPage_s.set('complete');
+    }}>result test</Button
+  >
+  <Button
+    on:click={() => {
       gsap.to('#bg', {
         duration: 0.3,
         opacity: 0,
