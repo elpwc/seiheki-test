@@ -1,35 +1,26 @@
 <script lang="ts">
-  const httpRequest = new XMLHttpRequest();
+  import { onMount } from 'svelte';
+  import Utils from './utils/utils';
 
-  /**
-   * 发送请求图片url对象
-   * @param tag
-   * @param r18 0 nor18 1混合 2r18
-   */
-  const sendImageURLRequest = (tag: string, r18: number = 2, size: 'original' | 'regular' | 'small' | 'thumb' | 'mini' = 'original') => {
-    httpRequest.open('POST', './get_img_url.php', true);
-    httpRequest.setRequestHeader('Content-type', 'application/json');
-    httpRequest.send(
-      JSON.stringify({
-        tag: tag || '贫乳',
-        r18: r18 || 2,
-        size: size || 'original',
-      })
-    );
-  };
-
-  httpRequest.onreadystatechange = () => {
-    if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-      const res = JSON.parse(JSON.parse(httpRequest.responseText).data);
-
-      console.log('result: ', res);
-    }
-  };
-
-  sendImageURLRequest('足');
+  let image: Types.Setu | undefined = undefined;
+  let inputvalue: string = '';
+  onMount(async () => {
+    image = await Utils.get_setu('贫乳', 1, ['regular']);
+    console.log('image', image, image?.urls);
+  });
 </script>
 
-<div>结果页 展示分数+相关tag的pixiv涩图 待制作</div>
+<div>
+  <input bind:value={inputvalue} placeholder="这里输入xp" />
+  <button
+    on:click={async () => {
+      image = await Utils.get_setu(inputvalue, 1, ['regular']);
+
+      console.log('image', image, image?.urls);
+    }}>GET SETU</button
+  >
+  <img width="100%" height="100%" src={image?.urls.regular} alt="setu desu" />
+</div>
 
 <style>
 </style>

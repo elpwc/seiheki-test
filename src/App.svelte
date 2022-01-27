@@ -12,7 +12,7 @@
   import seiheki_json from './dataLoader';
   import { LevelBuilder } from './objects/level';
   import About from './About.svelte';
-  import utils from './utils';
+  import Utils from './utils/utils';
 
   import Result from './Result.svelte';
 
@@ -204,7 +204,7 @@
 
   <div class="tipbox leveltip">
     <p style={`color: ${backgroundColor}; font-size: 20px; font-weight: bold; margin-right: 10px; width: 220px; margin-top: 10px;`}>
-      {`${utils.convert_to_rome(level_data[current_level - 1]?.level)}级xp`}<br />{`"${level_data[current_level - 1]?.title}"`}
+      {`${Utils.convert_to_rome(level_data[current_level - 1]?.level)}级xp`}<br />{`"${level_data[current_level - 1]?.title}"`}
     </p>
     <p style={`color: ${backgroundColor}; font-size: 10px; width: 400px;`}>{level_data[current_level - 1]?.description}</p>
   </div>

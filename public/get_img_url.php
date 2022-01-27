@@ -1,33 +1,35 @@
 <?php
-//error_reporting(E_ALL ^ E_NOTICE); 
 
-@$tag = $_POST['tag'];
-@$r18 = $_POST['r18'];
-@$size = $_POST['size'];
+$json = file_get_contents('php://input');
+$data = json_decode($json);
 
-const LOLICONAPI_BASE = 'https://api.lolicon.app/setu/v2'; //'https://api.lolicon.app/setu/v2';
+@$tag = $data->tag;
+@$r18 = $data->r18;
+@$size = $data->size;
 
+const LOLICONAPI_BASE = 'https://api.lolicon.app/setu/v2';
 /**
  * @see https://api.lolicon.app/#/setu
  */
-echo json_encode(curlPost(LOLICONAPI_BASE, array(
+$encodeddata = json_encode([
     'r18' => (int)$r18,
     'num' => 1,
     //'uid' => int[],
     //'keyword' => string,
     'tag' => [$tag],
-    //'size' => ['original'],
-    //'proxy' => 'i.pixiv.cat',
+    'size' => $size,
+    'proxy' => 'https://i.pixiv.re/',
     //'dateAfter' => int,
     //'dateBefore' => int,
     //'dsc' => false,
-)));
+]);
+echo json_encode(curlPost(LOLICONAPI_BASE, $encodeddata));
 
 
 function curlPost($url, $post_data)
 {
     $header  = array(
-        "Content-Type" => "application/json",
+        "Content-Type: application/json; charset=utf-8",
     );
 
     return curl_request($url, $post_data, $header);
@@ -38,7 +40,7 @@ function curlPost($url, $post_data)
  * @param [api_url:目标url | post_data:post参数 | header:头信息数组 | referer_url:来源url]
  * @return [code:状态码(200执行成功、400执行异常) | data:数据]
  */
-function curl_request($api_url, $post_data = [], $header = [], $referer_url = '')
+function curl_request($api_url, $post_data = '', $header = [], $referer_url = '')
 {
     $ch = curl_init(); //初始化CURL句柄
     curl_setopt($ch, CURLOPT_URL, $api_url);
@@ -64,10 +66,9 @@ function curl_request($api_url, $post_data = [], $header = [], $referer_url = ''
     //curl_setopt( $ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1 );    //设置curl使用的HTTP协议
 
     /**配置POST请求**/
-    if ($post_data && is_array($post_data)) {
-        curl_setopt($ch, CURLOPT_POST, 1); //支持post提交数据
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post_data)); //
-    }
+    curl_setopt($ch, CURLOPT_POST, 1); //支持post提交数据
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data); //
+
 
     /**禁止证书验证防止curl输出空白**/
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //禁止 cURL 验证对等证书
@@ -82,5 +83,5 @@ function curl_request($api_url, $post_data = [], $header = [], $referer_url = ''
     }
     curl_close($ch);
 
-    return ['code' => $code, 'data' => $data];
+    return ['code' => $code, 'data' => json_decode($data)];
 }

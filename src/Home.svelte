@@ -104,7 +104,7 @@
   <div>
     <p class="title">
       性癖等级测试器<br />
-      <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver 0.0.1.0</span>
+      <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver 0.0.2.0</span>
     </p>
     <div>
       <Button
