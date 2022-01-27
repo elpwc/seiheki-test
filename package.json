@@ -1,6 +1,6 @@
 {
   "name": "seiheki-test",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "build": "rollup -c",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@rollup/plugin-json": "^4.1.0",
     "animate.css": "^4.1.1",
+    "axios": "0.21.1",
     "gsap": "^3.9.0",
     "lodash": "^4.17.21",
     "sirv-cli": "^1.0.0"

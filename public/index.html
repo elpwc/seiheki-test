@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="author" content="elpwc" />
-    <title>Seiheki-test</title>
 
-    <link rel="icon" type="image/png" href="./favicon.png" />
-    <link rel="stylesheet" href="./global.css" />
-    <link rel="stylesheet" href="./build/bundle.css" />
-    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /-->
-    <script defer src="./build/bundle.js"></script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="author" content="elpwc" />
+  <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+  <META HTTP-EQUIV="expires" CONTENT="0">
+  <title>Seiheki-test</title>
 
-  <body></body>
+  <link rel="icon" type="image/png" href="./favicon.png" />
+
+  <script type="text/javascript">
+    // refresh cashing js/css.
+    const VERSION = '0.0.2.1';
+    const dev = true;
+    const DEV_CODE = ~~(100 * Math.random());
+    const head = document.getElementsByTagName('head')[0];
+    const link1 = document.createElement('link');
+    link1.setAttribute('rel', 'stylesheet');
+    link1.setAttribute('href', './global.css?version=' + VERSION + (dev && ('&dev=' + DEV_CODE)));
+    const link2 = document.createElement('link');
+    link2.setAttribute('rel', 'stylesheet');
+    link2.setAttribute('href', './build/bundle.css?version=' + VERSION + (dev && ('&dev=' + DEV_CODE)));
+    const script = document.createElement('script');
+    script.setAttribute('defer', 'true');
+    script.setAttribute('src', './build/bundle.js?version=' + VERSION + (dev && ('&dev=' + DEV_CODE)));
+    head.appendChild(link1);
+    head.appendChild(link2);
+    head.appendChild(script);
+  </script>
+
+  <!--link rel="stylesheet" href="./global.css?version=0.0.2.1" /-->
+  <!--link rel="stylesheet" href="./build/bundle.css?version=0.0.2.1" /-->
+  <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /-->
+  <!--script defer src="./build/bundle.js?version=0.0.2.1"></script-->
+</head>
+
+<body></body>
+
 </html>
