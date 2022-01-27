@@ -2,5 +2,3 @@
 /public/build/
 
 .DS_Store
-
-/src/pixiv_api_php/Curl/

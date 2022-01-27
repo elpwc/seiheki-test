@@ -14,7 +14,6 @@
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^2.0.0",
     "@types/lodash": "^4.14.178",
-    "axios": "^0.25.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
@@ -31,8 +30,6 @@
     "animate.css": "^4.1.1",
     "gsap": "^3.9.0",
     "lodash": "^4.17.21",
-    "pixiv-api-client": "^0.25.0",
-    "pixiv-app-api": "^1.2.1",
     "sirv-cli": "^1.0.0"
   }
 }
