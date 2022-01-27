@@ -2,6 +2,8 @@
 //error_reporting(E_ALL ^ E_NOTICE); 
 
 @$tag = $_POST['tag'];
+@$r18 = $_POST['r18'];
+@$size = $_POST['size'];
 
 const LOLICONAPI_BASE = 'https://api.lolicon.app/setu/v2'; //'https://api.lolicon.app/setu/v2';
 
@@ -9,7 +11,7 @@ const LOLICONAPI_BASE = 'https://api.lolicon.app/setu/v2'; //'https://api.lolico
  * @see https://api.lolicon.app/#/setu
  */
 echo json_encode(curlPost(LOLICONAPI_BASE, array(
-    'r18' => 2,
+    'r18' => (int)$r18,
     'num' => 1,
     //'uid' => int[],
     //'keyword' => string,
