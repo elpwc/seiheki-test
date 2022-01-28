@@ -1,20 +1,25 @@
+<!--
+  App容器，实现基于svelte stores的简易路由以实现SPA页面切换
+  Author: wniko
+-->
 <script lang="ts">
-  import type Seiheki from './objects/seiheki';
-  import { SeihekiBuilder } from './objects/seiheki';
-  import Card from './Card.svelte';
-  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, selected, scoreSum_s, seiheki_data, currentPage_s, level_data } from './stores';
-  import SeihekiShow from './SeihekiShow.svelte';
+  import type Seiheki from './utils/seiheki';
+  import { SeihekiBuilder } from './utils/seiheki';
+  import Card from './components/Card.svelte';
+  import { currentSeihekiPage_s, winHeight_s, winWidth_s, scoreSum_s, currentPage_s } from './stores';
+  import { device, selected, seiheki_data, level_data } from './globals';
+  import SeihekiShow from './pages/SeihekiShow.svelte';
   import gsap from 'gsap';
   import { onMount } from 'svelte';
-  import Home from './Home.svelte';
+  import Home from './pages/Home.svelte';
   import test_data from './data/_safe.json';
 
-  import seiheki_json from './dataLoader';
-  import { LevelBuilder } from './objects/level';
-  import About from './About.svelte';
+  import seiheki_json from './utils/dataLoader';
+  import { LevelBuilder } from './utils/level';
+  import About from './pages/About.svelte';
   import Utils from './utils/utils';
 
-  import Result from './Result.svelte';
+  import Result from './pages/Result.svelte';
 
   const safe_mode = false; // office developping mode
 

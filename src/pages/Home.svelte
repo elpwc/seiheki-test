@@ -1,9 +1,13 @@
+<!--
+  主页
+  Author: wniko
+-->
 <script lang="ts">
   import gsap, { CustomEase } from 'gsap/all';
   import { onMount } from 'svelte';
   import About from './About.svelte';
-  import Button from './components/Button.svelte';
-  import { currentPage_s, winHeight_s, winWidth_s, currentSeihekiPage_s } from './stores';
+  import Button from '../components/Button.svelte';
+  import { currentPage_s, winHeight_s, winWidth_s, currentSeihekiPage_s } from '../stores';
 
   let start_clicked: boolean = false;
 
@@ -114,6 +118,11 @@
       >
       <Button
         on:click={() => {
+          currentPage_s.set('');
+        }}>涩图</Button
+      >
+      <Button
+        on:click={() => {
           window.open('https://github.com/elpwc/seiheki-test', '_blank');
         }}
       >
@@ -162,6 +171,24 @@
     {/if}
   </div>
 </div>
+
+<!--div>
+  <div>
+
+  </div>
+  <div>
+    <div id="chong" style="background-color: #47c99e;" on:click|once={chong_onclick}>
+      <div style="z-index: 1;">START</div>
+      {#if !start_clicked}
+        <div id="start_blue" style="z-index: 0;color: #82eaff; top:30%; left: 9%;">START</div>
+        <div id="start_red" style="z-index: 0;color: #ff8686; top:31%; left: 10%;">START</div>
+      {/if}
+    </div>
+    <div>
+
+    </div>
+  </div>
+</div-->
 
 <style>
   .title {

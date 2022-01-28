@@ -1,6 +1,10 @@
+<!--
+  结果展示页
+  Author: wniko
+-->
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Utils from './utils/utils';
+  import Utils from '../utils/utils';
 
   let image: Types.Setu | undefined = undefined;
   let inputvalue: string = '';

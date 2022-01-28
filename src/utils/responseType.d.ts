@@ -1,4 +1,7 @@
 declare namespace Types {
+  /**
+   * 从服务器接收到的涩图对象
+   */
   interface Setu {
     pid: number; //	作品 pid
     p: number; //	作品所在页

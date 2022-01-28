@@ -1,8 +1,13 @@
+<!--
+  关于Modal
+  Author: wniko
+  Date: 2022-1-28
+-->
 <script>
   import gsap from 'gsap/all';
-  import Button from './components/Button.svelte';
-  import { currentPage_s } from './stores';
-  import Modal from './components/Modal.svelte';
+  import Button from '../components/Button.svelte';
+  import { currentPage_s } from '../stores';
+  import Modal from '../components/Modal.svelte';
 </script>
 
 <Modal width="60%">

@@ -1,0 +1,8 @@
+/components/    组件
+/data/          性癖数据
+/pages/         页面
+/utils/         接口和方法
+
+globals.ts      全局变量
+stores.ts       Svelte stores
+    

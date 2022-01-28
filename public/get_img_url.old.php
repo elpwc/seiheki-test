@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * 获取指定Tag涩图返回前端(使用GET请求(未完成 & 废弃))
+ * @author wniko
+ */
+
 $json = file_get_contents('php://input');
 $data = json_decode($json);
 

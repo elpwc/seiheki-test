@@ -1,6 +1,10 @@
+<!--
+  一个页面
+  Author: wniko
+-->
 <script lang="ts">
   import { afterUpdate, beforeUpdate, onDestroy, onMount } from 'svelte';
-  import { currentSeihekiPage_s, winHeight_s, winWidth_s } from './stores';
+  import { currentSeihekiPage_s, winHeight_s, winWidth_s } from '../stores';
   onMount(async () => {});
 
   onDestroy(() => {});

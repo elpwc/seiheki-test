@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+/**
+ * 功能性方法
+ */
 export default class Utils {
   /**
    * 获取罗马数字
@@ -32,7 +35,7 @@ export default class Utils {
    * @param size 多个尺寸
    * @returns 返回一个Promise对象
    */
-  static get_setu = async (tag: string, r18: number = 1, size: ('original' | 'regular' | 'small' | 'thumb' | 'mini')[] = ['original']) => {
+  static get_setu = async (tag: string, r18: 0 | 1 | 2 = 1, size: ('original' | 'regular' | 'small' | 'thumb' | 'mini')[] = ['original']) => {
     return new Promise((resolve: (value: Types.Setu) => void, reject: (reason?: any) => void) => {
       // let httpRequest = new XMLHttpRequest();
 

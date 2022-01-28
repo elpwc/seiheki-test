@@ -1,9 +1,14 @@
+<!--
+  性癖卡片
+  Author: wniko
+-->
 <script lang="ts">
-  import type Seiheki from './objects/seiheki';
-  import { SeihekiBuilder } from './objects/seiheki';
+  import type Seiheki from '../utils/seiheki';
+  import { SeihekiBuilder } from '../utils/seiheki';
   export let data: Seiheki | undefined = SeihekiBuilder('', 0, 0);
   export let color: string = '';
-  import { currentSeihekiPage_s, winHeight_s, winWidth_s, device, seiheki_data, scoreSum_s, currentPage_s, selected } from './stores';
+  import { currentSeihekiPage_s, winHeight_s, winWidth_s, scoreSum_s, currentPage_s } from '../stores';
+  import { device, selected, seiheki_data, level_data } from '../globals';
 
   let currentSeihekiPage: number = 0;
   currentSeihekiPage_s.subscribe((v) => {

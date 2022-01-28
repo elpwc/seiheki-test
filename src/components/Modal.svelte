@@ -1,3 +1,7 @@
+<!--
+  自定义Modal组件
+  Author: wniko
+-->
 <script lang="ts">
   import gsap from 'gsap/all';
   import { onDestroy, onMount } from 'svelte';
