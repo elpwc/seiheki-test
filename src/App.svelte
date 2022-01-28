@@ -21,19 +21,20 @@
 
   import Result from './pages/Result.svelte';
 
+  /** SFW调试mode，在公司办公室开发时启用() */
   const safe_mode = false; // office developping mode
 
   onMount(async () => {
     winHeight_s.set(window.innerHeight);
     winWidth_s.set(window.innerWidth);
 
+    // 导入性癖数据
     if (safe_mode) {
       test_data.seihekis.forEach((seiheki) => {
         seiheki_data.push(SeihekiBuilder(seiheki.title, 1, seiheki.score, seiheki.desc));
       });
     } else {
       seiheki_json.forEach((level_d, level: number) => {
-        // @ts-ignore
         level_data.push(LevelBuilder(level_d.config.title, level + 1, level_d.config.color, level_d.config.desc));
         level_d.seihekis.forEach((seiheki) => {
           seiheki_data.push(SeihekiBuilder(seiheki.title, level + 1, seiheki.score, seiheki.desc));
@@ -57,12 +58,16 @@
 
   let scoreSum: number = 0;
 
+  // 从store读取数据
+  // 当前分数
   scoreSum_s.subscribe((v) => {
     scoreSum = v;
   });
 
+  // 当前页
   currentPage_s.subscribe((v) => {
     currentPage = v;
+    // 页面背景
     switch (v) {
       case 'home':
         backgroundColor = '#f8f8f8';
@@ -89,6 +94,10 @@
     w_height = v;
   });
 
+  /**
+   * 背景色过渡
+   * @param to 目标色
+   */
   const change_bg = async (to: string) => {
     gsap.to('.bg', {
       duration: 1,
@@ -103,6 +112,7 @@
   let last_page = -1;
   let last_level = 0,
     current_level = 0;
+  // 当前性癖
   currentSeihekiPage_s.subscribe((v) => {
     last_page = currentSeihekiPage;
     current_level = seiheki_data[v]?.level;
@@ -207,6 +217,7 @@
 <main>
   <div class="page bg" style={`z-index: 0; background-color: ${backgroundColor}`} />
 
+  <!--右上角Tips-->
   <div class="tipbox leveltip">
     <p style={`color: ${backgroundColor}; font-size: 20px; font-weight: bold; margin-right: 10px; width: 220px; margin-top: 10px;`}>
       {`${Utils.convert_to_rome(level_data[current_level - 1]?.level)}级xp`}<br />{`"${level_data[current_level - 1]?.title}"`}
@@ -226,6 +237,7 @@
     </p>
   </div>
 
+  <!--页面内容-->
   <div class="page" style="z-index: 1;">
     {#if currentPage === 'home' || currentPage === 'about'}
       <div>
@@ -257,6 +269,7 @@
     {/if}
   </div>
 
+  <!--性癖页时的header-->
   {#if currentPage === 'select'}
     <div class="header" style="z-index: 2;">
       <div
@@ -280,8 +293,10 @@
         {/if}
       </div>
 
+      <!--当前分数-->
       <div class="header-item">{`${scoreSum}'`}</div>
 
+      <!--当前进度-->
       <div class="header-item">
         {`${currentSeihekiPage + 1} / ${seiheki_data.length}`}
       </div>

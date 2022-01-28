@@ -9,8 +9,18 @@
   import Button from '../components/Button.svelte';
   import { currentPage_s, winHeight_s, winWidth_s, currentSeihekiPage_s } from '../stores';
 
+  /**
+   * 是否已按下START按钮
+   * @description 为了实现按下后背景旋转div取消显示
+   */
   let start_clicked: boolean = false;
 
+  /** 当前版本 */
+  const VERSION = '0.0.2.2';
+
+  /**
+   * START按钮按下
+   */
   const chong_onclick = () => {
     start_clicked = true;
     gsap.to('#chong', {
@@ -33,6 +43,8 @@
     });
   };
 
+  // 获取store数据
+
   let currentPage = 'home';
   currentPage_s.subscribe((v) => {
     currentPage = v;
@@ -46,6 +58,7 @@
   winWidth_s.subscribe((v) => {
     winwidth = v;
   });
+
   onMount(async () => {
     gsap.to('.rotate_circle.c1', {
       duration: 3,
@@ -108,7 +121,7 @@
   <div>
     <p class="title">
       性癖等级测试器<br />
-      <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver 0.0.2.0</span>
+      <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver {VERSION}</span>
     </p>
     <div>
       <Button
@@ -172,6 +185,8 @@
   </div>
 </div>
 
+<!--试图改为水波样式按钮的测试（摸了-->
+
 <!--div>
   <div>
 
@@ -189,7 +204,6 @@
     </div>
   </div>
 </div-->
-
 <style>
   .title {
     font-size: 40px;
