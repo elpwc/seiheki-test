@@ -2,6 +2,16 @@
 <html lang="zh-CN">
 
 <head>
+  <!--Baidu Analytics-->
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7dc1c72bf646c4638e82f81f5ce6fe95";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="author" content="elpwc" />
@@ -13,20 +23,22 @@
   <link rel="icon" type="image/png" href="./favicon.png" />
 
   <script type="text/javascript">
-    // refresh cashing js/css.
-    const VERSION = '0.0.2.1';
-    const dev = true;
-    const DEV_CODE = ~~(100 * Math.random());
+    // refresh cashed js/css.
+    const VERSION = '0.0.2.2';        // current version
+    const in_dev = true;              // is in dev
+    const DEV_CODE = ~~(100 * Math.random());                             // devCode which updates when page reloads while in_dev is true
+    const params = '?ver=' + VERSION + (in_dev && ('&dev=' + DEV_CODE));  // Parameters after css/js filename
+    // set document
     const head = document.getElementsByTagName('head')[0];
     const link1 = document.createElement('link');
     link1.setAttribute('rel', 'stylesheet');
-    link1.setAttribute('href', './global.css?version=' + VERSION + (dev && ('&dev=' + DEV_CODE)));
+    link1.setAttribute('href', './global.css' + params);
     const link2 = document.createElement('link');
     link2.setAttribute('rel', 'stylesheet');
-    link2.setAttribute('href', './build/bundle.css?version=' + VERSION + (dev && ('&dev=' + DEV_CODE)));
+    link2.setAttribute('href', './build/bundle.css' + params);
     const script = document.createElement('script');
     script.setAttribute('defer', 'true');
-    script.setAttribute('src', './build/bundle.js?version=' + VERSION + (dev && ('&dev=' + DEV_CODE)));
+    script.setAttribute('src', './build/bundle.js' + params);
     head.appendChild(link1);
     head.appendChild(link2);
     head.appendChild(script);
