@@ -20,6 +20,7 @@
   import Utils from './utils/utils';
 
   import Result from './pages/Result.svelte';
+  import RandomSetu from './pages/RandomSetu.svelte';
 
   /** SFW调试mode，在公司办公室开发时启用() */
   const safe_mode = false; // office developping mode
@@ -237,7 +238,7 @@
     </p>
   </div>
 
-  <!--页面内容-->
+  <!--页面内容 (简易SPA路由) -->
   <div class="page" style="z-index: 1;">
     {#if currentPage === 'home' || currentPage === 'about'}
       <div>
@@ -263,6 +264,10 @@
         <Card className={`card2`} left={w_width}>
           <SeihekiShow color={backgroundColor} data={seiheki_data[currentSeihekiPage >= seiheki_data.length - 1 ? seiheki_data.length - 1 : currentSeihekiPage + 1]} />
         </Card>
+      </div>
+    {:else if currentPage === 'random'}
+      <div>
+        <Card left={0}><RandomSetu /></Card>
       </div>
     {:else}
       <div><Card left={0}>404</Card></div>

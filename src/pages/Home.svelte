@@ -131,7 +131,7 @@
       >
       <Button
         on:click={() => {
-          currentPage_s.set('');
+          currentPage_s.set('random');
         }}>涩图</Button
       >
       <Button
