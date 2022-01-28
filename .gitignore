@@ -2,3 +2,6 @@
 /public/build/
 
 .DS_Store
+
+/public/private/*
+!/public/private/*.example.*

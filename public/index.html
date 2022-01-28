@@ -21,12 +21,14 @@
   <title>Seiheki-test</title>
 
   <link rel="icon" type="image/png" href="./favicon.png" />
+  <!--get ip and position, used in utils.ts-->
+  <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
 
   <script type="text/javascript">
     // refresh cashed js/css.
-    const VERSION = '0.0.2.2';        // current version
+    const VERSION = '0.0.3.0';        // current version, !!! update this in EVERY PUBLISH when js/css contents has been changed !!!
     const in_dev = true;              // is in dev
-    const DEV_CODE = ~~(100 * Math.random());                             // devCode which updates when page reloads while in_dev is true
+    const DEV_CODE = ~~(100000 * Math.random());                             // devCode which updates when page reloads while in_dev is true
     const params = '?ver=' + VERSION + (in_dev && ('&dev=' + DEV_CODE));  // Parameters after css/js filename
     // set document
     const head = document.getElementsByTagName('head')[0];

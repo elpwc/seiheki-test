@@ -34,6 +34,7 @@ export default class Utils {
    * @param r18 0: Non-R18, 1: R18, 2: Mix
    * @param size 多个尺寸
    * @returns 返回一个Promise对象
+   * @author wniko
    */
   static get_setu = async (tag: string, r18: 0 | 1 | 2 = 1, size: ('original' | 'regular' | 'small' | 'thumb' | 'mini')[] = ['original']) => {
     return new Promise((resolve: (value: Types.Setu) => void, reject: (reason?: any) => void) => {
@@ -78,5 +79,18 @@ export default class Utils {
 
       //sendImageURLRequest(tag, r18, size);
     });
+  };
+
+  /**
+   * 获取IP和地址
+   * @returns
+   * @author wniko
+   */
+  static get_ip_position = (): Types.GetIPPositionReturn => {
+    // @ts-ignore
+    const value = returnCitySN;
+    if (value) {
+      return value as Types.GetIPPositionReturn;
+    }
   };
 }

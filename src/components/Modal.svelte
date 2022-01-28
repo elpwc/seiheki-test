@@ -4,34 +4,48 @@
 -->
 <script lang="ts">
   import gsap from 'gsap/all';
-  import { onDestroy, onMount } from 'svelte';
+  import { afterUpdate, onDestroy, onMount } from 'svelte';
+  import { fade, fly } from 'svelte/transition';
+  import Button from './Button.svelte';
 
+  export let title: string = '';
   export let width: string = '60%';
-
-  onMount(async () => {
-    gsap.from('#bg', {
-      duration: 0.5,
-      opacity: 0,
-      ease: 'none',
-    });
-    gsap.from('.modal', {
-      duration: 0.5,
-      opacity: 0,
-      top: '100%',
-      ease: 'power3.out',
-    });
-  });
-
-  onDestroy(async () => {});
+  export let showOkButton: boolean = false;
+  export let showCloseButton: boolean = false;
+  export let okButtonText = 'OK';
+  export let closeButtonText = 'Close';
+  export let onOKButtonClick: (value?: any) => void = () => {};
+  export let onCloseButtonClick: (value?: any) => void = () => {};
+  export let onFlyOutEnd: (value?: any) => void = () => {};
+  export let visible: boolean = false;
+  /** 关闭时强制刷新 */
+  //export let refreshOnClose: boolean = false;
 </script>
 
-<div id="container">
-  <div id="bg" />
+{#if visible}
+  <div id="container">
+    <div id="bg" transition:fade={{ duration: 300 }} on:outroend={onFlyOutEnd} />
 
-  <div class="modal"  style={`width: ${width}`}>
-    <slot />
+    <div class="modal" style={`width: ${width}`} transition:fly={{ y: 200, duration: 300 }}>
+      <!--标题-->
+      {#if title}
+        <p>{title}</p>
+        <hr />
+      {/if}
+      <div style="padding: 5px;">
+        <slot />
+        <div style="display:flex; justify-content:space-around;">
+          {#if showOkButton}
+            <Button on:click={onOKButtonClick} style="margin-right: 5px;">{okButtonText}</Button>
+          {/if}
+          {#if showCloseButton}
+            <Button on:click={onCloseButtonClick}>{closeButtonText}</Button>
+          {/if}
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+{/if}
 
 <style>
   #bg {

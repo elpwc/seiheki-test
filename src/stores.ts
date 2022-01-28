@@ -5,7 +5,7 @@
 import { writable, readable, Readable, Writable } from 'svelte/store';
 
 /** 当前页面 */
-export let currentPage_s: Writable<'' | 'home' | 'about' | 'select' | 'complete' | 'random'> = writable('home'); //home about select complete
+export let currentPage_s: Writable<'' | 'home' | 'select' | 'complete' | 'random'> = writable('home'); //home about select complete
 /** 当前性癖 */
 export let currentSeihekiPage_s: Writable<number> = writable(-1);
 /** 窗口高度 */

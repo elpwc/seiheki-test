@@ -2,10 +2,11 @@
   自定义按钮组件
   Author: wniko
 -->
-<script>
+<script lang="ts">
+  export let style: string = '';
 </script>
 
-<button class="mybutton" on:click><slot /></button>
+<button class="mybutton" {style} on:click><slot /></button>
 
 <style>
   .mybutton {
@@ -20,7 +21,7 @@
       width: 37vw;
     }
   }
-  .mybutton:active{
+  .mybutton:active {
     background-color: gray;
     width: 33vw;
   }

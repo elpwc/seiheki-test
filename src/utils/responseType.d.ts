@@ -22,4 +22,33 @@ declare namespace Types {
       mini?: string;
     };
   }
+
+  /**
+   * 选中的性癖
+   */
+  interface SelectedSeiheki {
+    seiheki: Seiheki;
+    /** 选中的分值 */
+    selectedScore: number;
+  }
+
+  /**
+   * 获取记录GET参数
+   */
+  interface GetRecordsParams {
+    count?: number;
+    ip?: string;
+  }
+
+  /**
+   * 获取IP/地址结果
+   */
+  interface GetIPPositionReturn {
+    /** IP */
+    cip: string;
+    /** 行政区划编码 */
+    cid: string;
+    /** 位置 */
+    cname: string;
+  }
 }

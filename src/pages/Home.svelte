@@ -5,9 +5,10 @@
 <script lang="ts">
   import gsap, { CustomEase } from 'gsap/all';
   import { onMount } from 'svelte';
-  import About from './About.svelte';
+  import About from './modals/AboutModal.svelte';
   import Button from '../components/Button.svelte';
   import { currentPage_s, winHeight_s, winWidth_s, currentSeihekiPage_s } from '../stores';
+  import RankModal from './modals/RankModal.svelte';
 
   /**
    * 是否已按下START按钮
@@ -16,7 +17,10 @@
   let start_clicked: boolean = false;
 
   /** 当前版本 */
-  const VERSION = '0.0.2.2';
+  const VERSION = '0.0.3.0';
+  /** 关于是否显示 */
+  let aboutModalVisibility: boolean = false;
+  let rankModalVisibility: boolean = false;
 
   /**
    * START按钮按下
@@ -118,6 +122,18 @@
 </script>
 
 <div>
+  <About
+    onClose={() => {
+      aboutModalVisibility = false;
+    }}
+    {aboutModalVisibility}
+  />
+  <RankModal
+    onOK={() => {
+      rankModalVisibility = false;
+    }}
+    {rankModalVisibility}
+  />
   <div>
     <p class="title">
       性癖等级测试器<br />
@@ -126,13 +142,30 @@
     <div>
       <Button
         on:click={() => {
-          currentPage_s.set('about');
-        }}>说明</Button
+          rankModalVisibility = true;
+        }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-stars" viewBox="0 0 16 16">
+          <path
+            fill-rule="evenodd"
+            d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"
+          />
+          <path
+            d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53z"
+          />
+        </svg>
+        排行榜</Button
       >
       <Button
         on:click={() => {
           currentPage_s.set('random');
-        }}>涩图</Button
+        }}>来张涩图</Button
+      >
+
+      <Button
+        on:click={() => {
+          aboutModalVisibility = true;
+        }}>说明</Button
       >
       <Button
         on:click={() => {

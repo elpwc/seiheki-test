@@ -8,7 +8,7 @@
   export let data: Seiheki | undefined = SeihekiBuilder('', 0, 0);
   export let color: string = '';
   import { currentSeihekiPage_s, winHeight_s, winWidth_s, scoreSum_s, currentPage_s } from '../stores';
-  import { device, selected, seiheki_data, level_data } from '../globals';
+  import { device, selectedSeihekis, seiheki_data, level_data } from '../globals';
 
   let currentSeihekiPage: number = 0;
   currentSeihekiPage_s.subscribe((v) => {
@@ -24,7 +24,7 @@
     // 累加分数
     scoreSum_s.update((n) => n + i);
     // 记录选项
-    selected.push([data?.title, data?.score, i]);
+    selectedSeihekis.push({ seiheki: data, selectedScore: i });
 
     // 判断是否是最后一页
     if (currentSeihekiPage < seiheki_data.length - 1) {

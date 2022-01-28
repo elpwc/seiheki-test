@@ -7,7 +7,7 @@
   import { SeihekiBuilder } from './utils/seiheki';
   import Card from './components/Card.svelte';
   import { currentSeihekiPage_s, winHeight_s, winWidth_s, scoreSum_s, currentPage_s } from './stores';
-  import { device, selected, seiheki_data, level_data } from './globals';
+  import { device, seiheki_data, level_data } from './globals';
   import SeihekiShow from './pages/SeihekiShow.svelte';
   import gsap from 'gsap';
   import { onMount } from 'svelte';
@@ -16,7 +16,6 @@
 
   import seiheki_json from './utils/dataLoader';
   import { LevelBuilder } from './utils/level';
-  import About from './pages/About.svelte';
   import Utils from './utils/utils';
 
   import Result from './pages/Result.svelte';
@@ -67,6 +66,7 @@
 
   // 当前页
   currentPage_s.subscribe((v) => {
+    console.log('crt page: ', v);
     currentPage = v;
     // 页面背景
     switch (v) {
@@ -75,9 +75,6 @@
         break;
       case 'select':
         backgroundColor = '#47c99e';
-        break;
-      case 'about':
-        backgroundColor = '#f8f8f8';
         break;
       case 'complete':
         backgroundColor = '#f8f8f8';
@@ -240,13 +237,10 @@
 
   <!--页面内容 (简易SPA路由) -->
   <div class="page" style="z-index: 1;">
-    {#if currentPage === 'home' || currentPage === 'about'}
+    {#if currentPage === 'home'}
       <div>
         <Card left={0}>
           <Home />
-          {#if currentPage === 'about'}
-            <About />
-          {/if}
         </Card>
       </div>
     {:else if currentPage === 'complete'}

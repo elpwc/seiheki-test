@@ -6,7 +6,8 @@ import type Level from './utils/level';
 import type Seiheki from './utils/seiheki';
 
 /** 做出的选项 */
-export let selected: [string, number, number][] = []; // seiheki, score, selected score
+export let selectedSeihekis: Types.SelectedSeiheki[] = []; // seiheki, score, selected score
+
 /** 性癖集合 */
 export let seiheki_data: Seiheki[] = [];
 /** 性癖等级集合 */
