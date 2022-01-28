@@ -15,21 +15,33 @@
     currentSeihekiPage = v;
   });
 
+  /**
+   * 按钮上的文字
+   */
   const button_text: string[][] = [[], ['不能接受', '接受 or 喜欢'], ['不能接受', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢'], ['不能接受', '无所谓', '接受', '喜欢']];
 
   const btn_onclick = (i: number) => {
+    // 累加分数
     scoreSum_s.update((n) => n + i);
+    // 记录选项
     selected.push([data?.title, data?.score, i]);
+
+    // 判断是否是最后一页
     if (currentSeihekiPage < seiheki_data.length - 1) {
+      // 页数加1
       currentSeihekiPage_s.set(currentSeihekiPage + 1);
     } else {
+      // 跳转到结果页
       currentPage_s.set('complete');
     }
   };
 </script>
 
 <div class="box">
+  <!--性癖标题-->
   <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data?.title.length)) * 3}px`}>{data?.title}</p>
+
+  <!--性癖说明-->
   <p class="quote-p">
     {#if data?.description !== ''}
       <span class="quote">“</span>
@@ -37,6 +49,8 @@
       <span class="quote">„</span>
     {/if}
   </p>
+
+  <!--按钮列表-->
   <div class="bottomdiv" style={device === 'desktop' ? 'padding: 0 35%' : ''}>
     <div class="btnlist">
       {#each new Array(data?.score + 1) as _, i}
@@ -94,6 +108,7 @@
     /*color: rgb(71, 201, 158);*/
     transition: 200ms;
     width: 95%;
+    user-select: none; /* 禁止选择，防止狂点导致的选中 */
   }
 
   @media (any-hover: hover) {
