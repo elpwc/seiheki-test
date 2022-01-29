@@ -38,6 +38,11 @@ declare namespace Types {
   interface GetRecordsParams {
     count?: number;
     ip?: string;
+    /**
+     * 可信度
+     * @description 0: all, 1: true, 2: false
+     * */
+    realType?: number;
   }
 
   /**

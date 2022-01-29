@@ -16,7 +16,7 @@
   let userRecords: UserRecord[] = [];
 
   onMount(async () => {
-    const res = await getRecords({});
+    const res = await getRecords({ realType: 1 });
     if (res) {
       userRecords = res;
     }
