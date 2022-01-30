@@ -1,10 +1,13 @@
 # seiheki-test
 
-测测你的性癖指数 / あなたの性癖レベルを測ろう
+<img src="./public/favicon.png" alt="logo" width="10%">
+
+**测测你的性癖指数 / あなたの性癖レベルを測ろう**  
+  
 开发中 · Under developping  
 Developped with Svelte
 
-性癖数据位于 /src/data/ 文件夹内，欢迎发 Issue 或 PullRequest 补充性癖~
+*性癖数据位于 /src/data/ 文件夹内，欢迎发 Issue 或 PullRequest 补充性癖~()*
 
 ## 📕 对采用的性癖 level 的说明
 
