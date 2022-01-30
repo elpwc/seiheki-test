@@ -4,19 +4,71 @@
 -->
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Button from '../components/Button.svelte';
+  import Modal from '../components/Modal.svelte';
+  import Svg from '../components/Svg.svelte';
   import { currentPage_s } from '../stores';
   import Utils from '../utils/utils';
 
   let image: Types.Setu | undefined = undefined;
   let inputvalue: string = '贫乳';
-  let r18type: 0 | 1 | 2 = 1;
+  let r18type: 0 | 1 | 2 = 0;
+
+  let originalImgModalBisivility: boolean = false;
+
+  let imageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' = 'free';
+  let oriImageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' = 'free';
+
+  const refreshImage = async () => {
+    imageLoadState = 'wait';
+    image = await Utils.get_setu(inputvalue, r18type, ['small', 'original']);
+    if (image) {
+      imageLoadState = 'loading';
+    } else {
+      imageLoadState = 'error';
+    }
+  };
+
   onMount(async () => {
-    image = await Utils.get_setu('贫乳', r18type, ['small']);
-    console.log('image', image, image?.urls);
+    refreshImage();
   });
 </script>
 
-<div>
+<div class="RandomSetuContainer">
+  <Modal
+    top="5%"
+    width="90%"
+    showOkButton
+    title="请长按图片保存"
+    visible={originalImgModalBisivility}
+    onOKButtonClick={() => {
+      originalImgModalBisivility = false;
+      oriImageLoadState = 'free';
+    }}
+  >
+    {#if oriImageLoadState === 'complete'}
+      <a href={`https://www.pixiv.net/artworks/${image?.pid}`} target="_blank"
+        >在网页版Pixiv查看
+        <Svg name="link" />
+      </a>
+    {:else if oriImageLoadState === 'loading'}
+      <p><Svg style="color: gray;" name="download" /> 图片加载中</p>
+    {:else if oriImageLoadState === 'error'}
+      <p>😣 图片加载失败，如果网络没问题大概是服务器炸了喵(</p>
+      <p>方便的话进首页点进github页面发个issue反馈一下orz</p>
+    {/if}
+    <div class="imgContainer" style={`height: ${window.innerHeight * 0.6}px;`}>
+      <img
+        on:load={() => {
+          oriImageLoadState = 'complete';
+        }}
+        width="100%"
+        src={originalImgModalBisivility && image?.urls.original}
+        alt={image?.title}
+      />
+    </div>
+  </Modal>
+
   <button
     on:click={() => {
       currentPage_s.set('home');
@@ -24,24 +76,62 @@
   >
   <input bind:value={inputvalue} placeholder="这里输入xp" />
   <button
-    on:click={async () => {
-      image = await Utils.get_setu(inputvalue, 1, ['small', 'original']);
-
-      console.log('image', image, image?.urls);
+    on:click={() => {
+      refreshImage();
     }}>GET SETU</button
   >
 
-  <div style="display:flex; justify-content:center;">
-    <input type="radio" id="R18" bind:group={r18type} value={1} /><label for="R18">R18 Only</label>
-    <input type="radio" id="Safe" bind:group={r18type} value={0} /><label for="Safe">Safe Only</label>
-    <input type="radio" id="Mix" bind:group={r18type} value={2} /><label for="Mix">Mix</label>
+  <div style="display:flex; justify-content:center; gap: 10px;">
+    <label><input type="radio" bind:group={r18type} value={1} />R18 (NSFW)</label>
+    <label><input type="radio" bind:group={r18type} value={0} />R15</label>
+    <label><input type="radio" bind:group={r18type} value={2} />混合</label>
   </div>
 
-  <p>{image?.title + ' - ' + image?.author}</p>
-  <a href={image?.urls.original} target="_blank">查看原图</a>
+  {#if imageLoadState === 'complete'}
+    <Button
+      on:click={() => {
+        originalImgModalBisivility = true;
 
-  <img width="100%" height="100%" src={image?.urls.small} alt={image?.title} />
+        if (image) {
+          oriImageLoadState = 'loading';
+        } else {
+          oriImageLoadState = 'error';
+        }
+      }}>查看原图</Button
+    >
+    <p>{image?.title + ' - ' + image?.author}</p>
+  {:else if imageLoadState === 'wait'}
+    <p><Svg style="color: gray;" name="download" /> 搜索数据库中</p>
+  {:else if imageLoadState === 'loading'}
+    <p><Svg style="color: gray;" name="download" /> 图片加载中</p>
+  {:else if imageLoadState === 'error'}
+    <p>😣 图片加载失败，如果网络没问题大概是服务器炸了喵(</p>
+    <p>方便的话进首页点进github页面发个issue反馈一下orz</p>
+  {/if}
+
+  <img
+    on:loadstart={() => {
+      imageLoadState = 'loading';
+    }}
+    on:load={() => {
+      imageLoadState = 'complete';
+    }}
+    on:error={() => {
+      //imageLoadState = 'error';
+    }}
+    width="100%"
+    src={image?.urls.small ?? ''}
+    alt={image?.title}
+  />
 </div>
 
 <style>
+  .RandomSetuContainer {
+    margin-top: 5px;
+    height: 100%;
+    overflow-y: scroll;
+  }
+  .imgContainer {
+    overflow-y: scroll;
+  }
 </style>

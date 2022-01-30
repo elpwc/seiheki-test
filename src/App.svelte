@@ -20,6 +20,7 @@
 
   import Result from './pages/Result.svelte';
   import RandomSetu from './pages/RandomSetu.svelte';
+  import Svg from './components/Svg.svelte';
 
   /** SFW调试mode，在公司办公室开发时启用() */
   const safe_mode = false; // office developping mode
@@ -225,12 +226,7 @@
 
   <div class="tipbox scoretip" style="top: 23%;">
     <p style={`color: black; font-size: 10px; margin-right: 10px; width: 500px; margin-top: 10px;`}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path
-          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-        />
-      </svg>
+      <Svg name="info" />
       提示：评分是指<b>对相关作品的接受程度</b>，而不是自身能经历的程度。
     </p>
   </div>
@@ -282,9 +278,7 @@
           }
         }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-          <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" /></svg
-        >
+        <Svg name="back" />
         {#if currentSeihekiPage === 0}
           <span>回到首页</span>
         {:else}

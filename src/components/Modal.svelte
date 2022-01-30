@@ -10,6 +10,7 @@
 
   export let title: string = '';
   export let width: string = '60%';
+  export let top: string = '30%';
   export let showOkButton: boolean = false;
   export let showCloseButton: boolean = false;
   export let okButtonText = 'OK';
@@ -17,6 +18,7 @@
   export let onOKButtonClick: (value?: any) => void = () => {};
   export let onCloseButtonClick: (value?: any) => void = () => {};
   export let onFlyOutEnd: (value?: any) => void = () => {};
+  //export let onLoad: (value?: any) => void = () => {};
   export let visible: boolean = false;
   /** 关闭时强制刷新 */
   //export let refreshOnClose: boolean = false;
@@ -26,7 +28,7 @@
   <div id="container">
     <div id="bg" transition:fade={{ duration: 300 }} on:outroend={onFlyOutEnd} />
 
-    <div class="modal" style={`width: ${width}`} transition:fly={{ y: 200, duration: 300 }}>
+    <div class="modal" style={`width: ${width}; top: ${top};`} transition:fly={{ y: 200, duration: 300 }}>
       <!--标题-->
       {#if title}
         <p>{title}</p>
@@ -60,7 +62,6 @@
   }
   .modal {
     position: absolute;
-    top: 30%;
     height: fit-content;
     background-color: white;
     z-index: 1;

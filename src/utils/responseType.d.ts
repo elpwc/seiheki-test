@@ -42,7 +42,7 @@ declare namespace Types {
      * 可信度
      * @description 0: all, 1: true, 2: false
      * */
-    realType?: number;
+    realType?: 0 | 1 | 2;
   }
 
   /**

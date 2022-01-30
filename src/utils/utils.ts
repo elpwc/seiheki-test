@@ -69,8 +69,8 @@ export default class Utils {
 */
       axios
         .post('./get_img_url.php', {
-          tag: tag || '贫乳',
-          r18: r18 || 1,
+          tag: tag ?? '贫乳',
+          r18: r18 ?? 1,
           size: size || ['original'],
         })
         .then((res) => {
@@ -88,7 +88,7 @@ export default class Utils {
    */
   static get_ip_position = (): Types.GetIPPositionReturn => {
     // @ts-ignore
-    const value = returnCitySN;
+    const value = returnCitySN; // 见index.html <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
     if (value) {
       return value as Types.GetIPPositionReturn;
     }

@@ -32,7 +32,7 @@
   <div style="padding: 15px 0;">
     <input bind:value={name} placeholder="请输入名字，用于排行榜喵" /><br />
     <p style="display:flex; justify-content:center;">
-      <input id="checkbox1" type="checkbox" bind:checked /><label class="checkboxtext" for="checkbox1">我是根据自己的真实认知进行选择的</label>
+      <label class="checkboxtext"><input type="checkbox" bind:checked />我是根据自己的真实认知进行选择的</label>
     </p>
   </div>
 </Modal>
