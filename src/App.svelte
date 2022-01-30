@@ -21,6 +21,7 @@
   import Result from './pages/Result.svelte';
   import RandomSetu from './pages/RandomSetu.svelte';
   import Svg from './components/Svg.svelte';
+  import InDevModal from './pages/modals/InDevModal.svelte';
 
   /** SFW调试mode，在公司办公室开发时启用() */
   const safe_mode = false; // office developping mode
@@ -42,6 +43,8 @@
         });
       });
     }
+
+    inDevModalVisibility = true;
   });
 
   window.addEventListener('resize', () => {
@@ -58,6 +61,8 @@
   let backgroundColor: string = '#f8f8f8';
 
   let scoreSum: number = 0;
+
+  let inDevModalVisibility = false;
 
   // 从store读取数据
   // 当前分数
@@ -213,6 +218,12 @@
   });
 </script>
 
+<InDevModal
+  onClose={() => {
+    inDevModalVisibility = false;
+  }}
+  {inDevModalVisibility}
+/>
 <main>
   <div class="page bg" style={`z-index: 0; background-color: ${backgroundColor}`} />
 
