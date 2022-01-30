@@ -136,10 +136,13 @@
     {rankModalVisibility}
   />
   <div>
-    <p class="title">
-      XP系统测试器<br />
+    <div class="title">
+      <div style="display:flex; justify-content: center;">
+        <img src="favicon.png" alt="logo" width="50px" height="50px" />
+        <span>XP系统测试器</span>
+      </div>
       <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver {VERSION}</span>
-    </p>
+    </div>
     <div>
       <Button
         on:click={() => {
@@ -216,6 +219,7 @@
   .title {
     font-size: 40px;
     font-weight: bold;
+    padding: 35px 0;
   }
   .tip {
     position: fixed;
