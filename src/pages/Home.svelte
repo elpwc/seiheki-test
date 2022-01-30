@@ -137,7 +137,7 @@
   />
   <div>
     <p class="title">
-      性癖等级测试器<br />
+      XP系统测试器<br />
       <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver {VERSION}</span>
     </p>
     <div>
