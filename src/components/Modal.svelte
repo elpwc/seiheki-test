@@ -31,7 +31,7 @@
     <div class="modal" style={`width: ${width}; top: ${top};`} transition:fly={{ y: 200, duration: 300 }}>
       <!--标题-->
       {#if title}
-        <p>{title}</p>
+        <p class="title">{title}</p>
         <hr />
       {/if}
       <div style="padding: 5px;">
@@ -77,5 +77,9 @@
     display: flex;
     justify-content: center;
     align-content: center;
+  }
+  .title {
+    width: 100%;
+    text-align: center;
   }
 </style>
