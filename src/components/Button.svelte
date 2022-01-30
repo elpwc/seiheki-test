@@ -4,9 +4,25 @@
 -->
 <script lang="ts">
   export let style: string = '';
+  export let type: 'normal' | 'blue' | 'warning' = 'normal';
+  export let disabled: boolean = false;
+
+  let typeStyle = '';
+  switch (type) {
+    case 'normal':
+      typeStyle = 'background-color: white; color: black; border-color: darkgray;';
+      break;
+    case 'blue':
+      typeStyle = 'background-color: #5fb4d4; color: white; border-color: auto;';
+      break;
+    case 'warning':
+      typeStyle = 'background-color: red; color: white; border-color: auto;';
+      break;
+  }
+  let finalStyle = typeStyle + style;
 </script>
 
-<button class="mybutton" {style} on:click><slot /></button>
+<button class="mybutton" style={finalStyle} on:click {disabled}><slot /></button>
 
 <style>
   .mybutton {
