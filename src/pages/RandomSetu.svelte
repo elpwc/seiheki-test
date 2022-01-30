@@ -48,7 +48,7 @@
   >
     {#if oriImageLoadState === 'complete'}
       <a href={`https://www.pixiv.net/artworks/${image?.pid}`} target="_blank"
-        >在网页版Pixiv查看
+        >前往Pixiv查看
         <Svg name="link" />
       </a>
     {:else if oriImageLoadState === 'loading'}
@@ -68,61 +68,68 @@
       />
     </div>
   </Modal>
-
-  <button
-    on:click={() => {
-      currentPage_s.set('home');
-    }}>返回主页</button
-  >
-  <input bind:value={inputvalue} placeholder="这里输入xp" />
-  <button
-    on:click={() => {
-      refreshImage();
-    }}>GET SETU</button
-  >
-
-  <div style="display:flex; justify-content:center; gap: 10px;">
-    <label><input type="radio" bind:group={r18type} value={1} />R18 (NSFW)</label>
-    <label><input type="radio" bind:group={r18type} value={0} />R15</label>
-    <label><input type="radio" bind:group={r18type} value={2} />混合</label>
-  </div>
-
-  {#if imageLoadState === 'complete'}
-    <Button
+  <header>
+    <button
       on:click={() => {
-        originalImgModalBisivility = true;
-
-        if (image) {
-          oriImageLoadState = 'loading';
-        } else {
-          oriImageLoadState = 'error';
-        }
-      }}>查看原图</Button
+        currentPage_s.set('home');
+      }}>返回主页</button
     >
-    <p>{image?.title + ' - ' + image?.author}</p>
-  {:else if imageLoadState === 'wait'}
-    <p><Svg style="color: gray;" name="download" /> 搜索数据库中</p>
-  {:else if imageLoadState === 'loading'}
-    <p><Svg style="color: gray;" name="download" /> 图片加载中</p>
-  {:else if imageLoadState === 'error'}
-    <p>😣 图片加载失败，如果网络没问题大概是服务器炸了喵(</p>
-    <p>方便的话进首页点进github页面发个issue反馈一下orz</p>
-  {/if}
+    <input bind:value={inputvalue} placeholder="这里输入xp" />
+    <button
+      on:click={() => {
+        refreshImage();
+      }}>GET SETU</button
+    >
 
-  <img
-    on:loadstart={() => {
-      imageLoadState = 'loading';
-    }}
-    on:load={() => {
-      imageLoadState = 'complete';
-    }}
-    on:error={() => {
-      //imageLoadState = 'error';
-    }}
-    width="100%"
-    src={image?.urls.small ?? ''}
-    alt={image?.title}
-  />
+    <div style="display:flex; justify-content:center; gap: 10px;">
+      <label><input type="radio" bind:group={r18type} value={0} />R15</label>
+      <label><input type="radio" bind:group={r18type} value={1} />R18 (NSFW)</label>
+      <label><input type="radio" bind:group={r18type} value={2} />混合</label>
+    </div>
+    {#if imageLoadState === 'complete'}
+      <div class="seeoriginal">
+        <Button
+          type="blue"
+          style="border-radius: 20px; background-color: #3da7d8;"
+          on:click={() => {
+            originalImgModalBisivility = true;
+
+            if (image) {
+              oriImageLoadState = 'loading';
+            } else {
+              oriImageLoadState = 'error';
+            }
+          }}>查看原图</Button
+        >
+      </div>
+
+      <p>{image?.title + ' - ' + image?.author}</p>
+    {:else if imageLoadState === 'wait'}
+      <p><Svg style="color: gray;" name="download" /> 搜索数据库中</p>
+    {:else if imageLoadState === 'loading'}
+      <p><Svg style="color: gray;" name="download" /> 图片加载中</p>
+    {:else if imageLoadState === 'error'}
+      <p>😣 图片加载失败，如果网络没问题大概是服务器炸了喵(</p>
+      <p>方便的话进首页点进github页面发个issue反馈一下orz</p>
+    {/if}
+  </header>
+
+  <main>
+    <img
+      on:loadstart={() => {
+        imageLoadState = 'loading';
+      }}
+      on:load={() => {
+        imageLoadState = 'complete';
+      }}
+      on:error={() => {
+        //imageLoadState = 'error';
+      }}
+      width="100%"
+      src={image?.urls.small ?? ''}
+      alt={image?.title}
+    />
+  </main>
 </div>
 
 <style>
@@ -133,5 +140,19 @@
   }
   .imgContainer {
     overflow-y: scroll;
+  }
+  header {
+    position: sticky;
+    background-color: whitesmoke;
+    box-shadow: 0 0 5px 0 gray;
+  }
+
+  .seeoriginal {
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+  }
+  p {
+    margin: 0;
   }
 </style>
