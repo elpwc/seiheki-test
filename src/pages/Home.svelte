@@ -138,7 +138,7 @@
   <div>
     <div class="title">
       <div style="display:flex; justify-content: center;">
-        <img src="favicon.png" alt="logo" width="50px" height="50px" />
+        <img src="favicon.png?ver=1" alt="logo" width="50px" height="50px" />
         <span>XP系统测试器</span>
       </div>
       <span style="font-size: 10px; font-weight: normal; color: darkgray;">Author <i>wniko</i> 2022 ver {VERSION}</span>
