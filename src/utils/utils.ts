@@ -29,15 +29,16 @@ export default class Utils {
   };
 
   /**
-   * 获取一个涩图对象
-   * @param tag Tag
+   * 获取一组涩图对象
+   * @param tag Tags
    * @param r18 0: Non-R18, 1: R18, 2: Mix
    * @param size 多个尺寸
+   * @param num 请求数量
    * @returns 返回一个Promise对象
    * @author wniko
    */
-  static get_setu = async (tag: string, r18: 0 | 1 | 2 = 1, size: ('original' | 'regular' | 'small' | 'thumb' | 'mini')[] = ['original']) => {
-    return new Promise((resolve: (value: Types.Setu) => void, reject: (reason?: any) => void) => {
+  static get_setu = async (tag: string[], r18: 0 | 1 | 2 = 1, size: ('original' | 'regular' | 'small' | 'thumb' | 'mini')[] = ['original'], num: number = 1) => {
+    return new Promise((resolve: (value: Types.Setu[]) => void, reject: (reason?: any) => void) => {
       // let httpRequest = new XMLHttpRequest();
 
       /**
@@ -69,12 +70,13 @@ export default class Utils {
 */
       axios
         .post('./get_img_url.php', {
-          tag: tag ?? '贫乳',
+          tag: tag ?? ['贫乳'],
           r18: r18 ?? 1,
           size: size || ['original'],
+          num,
         })
         .then((res) => {
-          resolve(res?.data?.data?.data?.[0]);
+          resolve(res?.data?.data?.data);
         });
 
       //sendImageURLRequest(tag, r18, size);

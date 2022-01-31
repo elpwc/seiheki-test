@@ -11,6 +11,7 @@ $data = json_decode($json);
 @$tag = $data->tag;
 @$r18 = $data->r18;
 @$size = $data->size;
+@$num = $data->num;
 
 const LOLICONAPI_BASE = 'https://api.lolicon.app/setu/v2';
 /**
@@ -18,10 +19,10 @@ const LOLICONAPI_BASE = 'https://api.lolicon.app/setu/v2';
  */
 $encodeddata = json_encode([
     'r18' => (int)$r18,
-    'num' => 1,
+    'num' => (int)$num,
     //'uid' => int[],
     //'keyword' => string,
-    'tag' => [$tag],
+    'tag' => $tag,
     'size' => $size,
     'proxy' => 'https://i.pixiv.re/',
     //'dateAfter' => int,

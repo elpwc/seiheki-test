@@ -11,19 +11,24 @@
   import Utils from '../utils/utils';
 
   let image: Types.Setu | undefined = undefined;
-  let inputvalue: string = '贫乳';
+  let inputvalue: string = '贫乳,足';
   let r18type: 0 | 1 | 2 = 0;
 
   let originalImgModalBisivility: boolean = false;
 
-  let imageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' = 'free';
-  let oriImageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' = 'free';
+  let imageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' | 'notfound' = 'free';
+  let oriImageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' | 'notfound' = 'free';
 
   const refreshImage = async () => {
     imageLoadState = 'wait';
-    image = await Utils.get_setu(inputvalue, r18type, ['small', 'original']);
-    if (image) {
-      imageLoadState = 'loading';
+    const images: Types.Setu[] = await Utils.get_setu(inputvalue.replaceAll('，', ',').split(','), r18type, ['small', 'original']);
+    if (images) {
+      if (images.length === 0) {
+        imageLoadState = 'notfound';
+      } else {
+        image = images[0];
+        imageLoadState = 'loading';
+      }
     } else {
       imageLoadState = 'error';
     }
@@ -52,10 +57,13 @@
         <Svg name="link" />
       </a>
     {:else if oriImageLoadState === 'loading'}
-      <p><Svg style="color: gray;" name="download" /> 图片加载中</p>
+      <p><Svg style="color: gray;" name="download" /> 原图加载中</p>
     {:else if oriImageLoadState === 'error'}
       <p>😣 图片加载失败，如果网络没问题大概是服务器炸了喵(</p>
       <p>方便的话进首页点进github页面发个issue反馈一下orz</p>
+    {:else if oriImageLoadState === 'notfound'}
+      <p>在图库里没有找到符合tag的图喵</p>
+      <p />
     {/if}
     <div class="imgContainer" style={`height: ${window.innerHeight * 0.6}px;`}>
       <img
@@ -74,7 +82,7 @@
         currentPage_s.set('home');
       }}>返回主页</button
     >
-    <input bind:value={inputvalue} placeholder="这里输入xp" />
+    <input bind:value={inputvalue} placeholder="这里输入xp,可用逗号隔开输入多个" />
     <button
       on:click={() => {
         refreshImage();
@@ -111,6 +119,9 @@
     {:else if imageLoadState === 'error'}
       <p>😣 图片加载失败，如果网络没问题大概是服务器炸了喵(</p>
       <p>方便的话进首页点进github页面发个issue反馈一下orz</p>
+    {:else if imageLoadState === 'notfound'}
+      <p>在图库里没有找到符合tag的图喵</p>
+      <p />
     {/if}
   </header>
 
