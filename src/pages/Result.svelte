@@ -4,10 +4,11 @@
 -->
 <script lang="ts">
   import { afterUpdate, onMount } from 'svelte';
+  import { scale } from 'svelte/transition';
   import Button from '../components/Button.svelte';
   import Rank from '../components/Rank.svelte';
   import { selectedSeihekis } from '../globals';
-  import { scoreSum_s } from '../stores';
+  import { currentPage_s, scoreSum_s } from '../stores';
   import { addRecord, getRecords } from '../utils/api';
   import UserRecord, { UserRecordBuilder } from '../utils/record';
   import Utils from '../utils/utils';
@@ -19,6 +20,8 @@
   let scoreSum = 0;
   /** 显示的总分，因为要呈现逐步增加的效果 */
   let shown_scoreSum = 0;
+  /** 是否已经累加完毕 */
+  let add_done = false;
   /** 时候已经输入名字，用来控制得分版是否显示"待公布" */
   let isNameInputed = false;
   /** 选中的所有选项记录 */
@@ -77,6 +80,13 @@
         ((a) => {
           setTimeout(() => {
             shown_scoreSum = i;
+
+            if (shown_scoreSum === scoreSum) {
+              add_done = true;
+              setTimeout(() => {
+                add_done = false;
+              }, 100);
+            }
           }, ~~(i ** 2.114514));
         })(i);
       }
@@ -86,12 +96,19 @@
 
   <!--结果展示-->
   <div>
-    <p>你的XP指数为...</p>
+    <p class="title">你的总计XP分数为...</p>
     <!--得分-->
-    <p class="score">
-      {isNameInputed ? shown_scoreSum : '待公布'}
-    </p>
-    <p>
+    <div class="score_container">
+      <p class="score">
+        {isNameInputed ? shown_scoreSum : '待公布'}
+      </p>
+      {#if add_done}
+        <p class="score_fade" out:scale={{ duration: 3000, start: 3 }}>
+          {isNameInputed ? shown_scoreSum : '待公布'}
+        </p>
+      {/if}
+    </div>
+    <p class="title">
       超过了{(() => {
         let rank = userRecords.length;
         userRecords?.filter?.((record, index) => {
@@ -104,8 +121,13 @@
   </div>
 
   <!--个性化涩图-->
-  <p>根据你的喜好，为你准备了一些涩图，请点击下面查看</p>
-  <Button on:click={onSeeSetuClick}>查看</Button>
+  <p>根据你的喜好，为你准备了一些涩图</p>
+  <Button on:click={onSeeSetuClick}>查看涩图</Button>
+  <Button
+    on:click={() => {
+      currentPage_s.set('home');
+    }}>返回主页</Button
+  >
 
   <!--排行榜-->
   <div>
@@ -114,11 +136,27 @@
 </div>
 
 <style>
+  .score_container {
+    height: 100px;
+  }
   .score {
     font-size: 5em;
     font-weight: bold;
+    margin: 0;
+    width: 100%;
+    position: absolute;
+  }
+  .score_fade {
+    font-size: 5em;
+    font-weight: bold;
+    margin: 0;
+    width: 100%;
+    position: absolute;
   }
   .resultPageContainer {
     overflow-y: scroll;
+  }
+  .title {
+    font-size: 1.5em;
   }
 </style>
