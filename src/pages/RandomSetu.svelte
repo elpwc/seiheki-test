@@ -10,18 +10,25 @@
   import { currentPage_s } from '../stores';
   import Utils from '../utils/utils';
 
+  /** 显示的涩图对象 */
   let image: Types.Setu | undefined = undefined;
-  let inputvalue: string = '贫乳,足';
+  /** 输入框中的tags */
+  let tags: string = '贫乳,足';
+  /** r18类型 0：R15 1:R18 0:Mix */
   let r18type: 0 | 1 | 2 = 0;
 
+  /** 查看原图Modal可见性 */
   let originalImgModalBisivility: boolean = false;
 
+  /** 加载预览图片的状态 */
   let imageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' | 'notfound' = 'free';
+  /** 原图Modal里加载原图的状态 */
   let oriImageLoadState: 'free' | 'wait' | 'loading' | 'complete' | 'error' | 'notfound' = 'free';
 
+  /** 根据tags刷新图片 */
   const refreshImage = async () => {
     imageLoadState = 'wait';
-    const images: Types.Setu[] = await Utils.get_setu(inputvalue.replaceAll('，', ',').split(','), r18type, ['small', 'original']);
+    const images: Types.Setu[] = await Utils.get_setu(tags.replaceAll('，', ',').split(','), r18type, ['small', 'original']);
     if (images) {
       if (images.length === 0) {
         imageLoadState = 'notfound';
@@ -82,7 +89,7 @@
         currentPage_s.set('home');
       }}>返回主页</button
     >
-    <input bind:value={inputvalue} placeholder="这里输入xp,可用逗号隔开输入多个" />
+    <input bind:value={tags} placeholder="这里输入xp,可用逗号隔开输入多个" />
     <button
       on:click={() => {
         refreshImage();
