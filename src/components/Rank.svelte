@@ -1,8 +1,17 @@
 <script lang="ts">
+  import { beforeUpdate, onMount } from 'svelte';
+
   import type UserRecord from '../utils/record';
 
   export let userRecords: UserRecord[];
   export let height: string = `${window.innerHeight * 0.5}px`;
+
+  // 去掉php错误返回
+  beforeUpdate(() => {
+    if (typeof userRecords?.[0] !== 'object') {
+      userRecords = [];
+    }
+  });
 </script>
 
 <div class="rank" style="height: {height};">

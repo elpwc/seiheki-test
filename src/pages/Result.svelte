@@ -41,7 +41,12 @@
   const refreshRank = async () => {
     const res = await getRecords({ realType: 1 });
     if (res) {
-      userRecords = res;
+      // 去掉php错误返回
+      if (typeof userRecords?.[0] !== 'object') {
+        userRecords = [];
+      } else {
+        userRecords = res;
+      }
     }
   };
 
