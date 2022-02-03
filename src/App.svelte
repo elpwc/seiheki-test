@@ -22,6 +22,7 @@
   import RandomSetu from './pages/RandomSetu.svelte';
   import Svg from './components/Svg.svelte';
   import InDevModal from './pages/modals/InDevModal.svelte';
+  import R18GWarnModal from './pages/modals/R18GWarnModal.svelte';
 
   /** SFW调试mode，在公司办公室开发时启用() */
   const safe_mode = false; // office developping mode
@@ -63,6 +64,7 @@
   let scoreSum: number = 0;
 
   let inDevModalVisibility = false;
+  let R18GWarnModalVisibility = false;
 
   // 从store读取数据
   // 当前分数
@@ -122,6 +124,11 @@
     current_level = seiheki_data[v]?.level;
     // level changed
     if (seiheki_data.length > 0 && last_level !== current_level) {
+      if (current_level === 4) {
+        R18GWarnModalVisibility = true;
+      }
+
+      // 等级tip
       const tl = gsap.timeline();
       tl.to('.leveltip', {
         duration: 0.5,
@@ -145,6 +152,7 @@
 
     last_level = seiheki_data[v]?.level;
 
+    // 入场提示
     if (v === 0) {
       const tl2 = gsap.timeline();
       tl2.to('.scoretip', {
@@ -164,6 +172,7 @@
       );
     }
 
+    // 切换卡片
     if (last_page > v) {
       currentSeihekiPage = v;
       gsap.from('.card1', {
@@ -223,6 +232,16 @@
     inDevModalVisibility = false;
   }}
   {inDevModalVisibility}
+/>
+<R18GWarnModal
+  {R18GWarnModalVisibility}
+  onContinue={() => {
+    R18GWarnModalVisibility = false;
+  }}
+  onEnd={() => {
+    currentPage_s.set('complete');
+    R18GWarnModalVisibility = false;
+  }}
 />
 <main>
   <div class="page bg" style={`z-index: 0; background-color: ${backgroundColor}`} />
