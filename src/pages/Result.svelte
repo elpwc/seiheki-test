@@ -66,7 +66,7 @@
       name = '无名氏';
     }
     // 添加记录
-    const res = await addRecord(UserRecordBuilder(name, scoreSum, geo_info.cip, geo_info.cname, real));
+    const res = await addRecord(UserRecordBuilder(name, scoreSum, geo_info.cip, geo_info.cname, real, 0));
     // 更新排行榜
     refreshRank();
   };

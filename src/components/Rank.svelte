@@ -19,8 +19,9 @@
     <caption>排行榜</caption>
     <thead class="ranktitle">
       <tr>
-        <th>排行</th>
-        <th>得点</th>
+        <th style="width: 1.5em;"><!--排行--></th>
+        <th style="width: 40px;">得分</th>
+        <th style="width: 50px;">变态度</th>
         <th>名字</th>
         <th>地区</th>
       </tr>
@@ -33,7 +34,8 @@
             <!--円div-->
             <div>{index + 1}</div>
           </td>
-          <td>{record.score}点</td>
+          <td>{record.score}</td>
+          <td>{record.hentai}</td>
           <td>{record.name}</td>
           <td>{record.position}</td>
         </tr>
@@ -50,6 +52,7 @@
     background-color: white;
     font-size: 1.2em;
     overflow-y: scroll;
+    font-size: 1em;
   }
 
   .ranktitle {

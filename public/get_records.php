@@ -64,6 +64,7 @@ $res = [];
     'ip' => '',
     'position' => '',
     'real' => 1,
+    'hentai' => 0,
 ];
 */
 
@@ -75,7 +76,8 @@ if ($result->num_rows > 0) {
             'score' => (int)$row['score'],
             'ip' => $row['ip'],
             'position' => $row['position'],
-            'real' => $row['real']
+            'real' => $row['real'],
+            'hentai' => $row['hentai']
         ]);
         $i++;
     }

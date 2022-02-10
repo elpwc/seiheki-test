@@ -16,6 +16,7 @@ $data = json_decode($json);
 @$ip = trim((string)($data->ip));
 @$position = trim((string)($data->position));
 @$real = trim((string)($data->real));
+@$hentai = trim((string)($data->hentai));
 
 // 处理boolean JSON, PHP会将JSON false处理为空字符串, sbphp
 if ($real == '') $real = 0;
@@ -24,8 +25,8 @@ $sqllink = @mysqli_connect(HOST, USER, PASS, DBNAME) or die('数据库连接出�
 mysqli_set_charset($sqllink, 'utf8');
 
 $sql = 'INSERT 
-        INTO records (`name`, `score`, `ip`, `position`, `real`)
-        VALUES ("' . cator_to_cn_censorship(anti_inj($name)) . '","' . anti_inj($score) . '","' . anti_inj($ip) . '","' . anti_inj($position) . '","' . anti_inj($real) . '");
+        INTO records (`name`, `score`, `ip`, `position`, `real`, `hentai`)
+        VALUES ("' . cator_to_cn_censorship(anti_inj($name)) . '","' . anti_inj($score) . '","' . anti_inj($ip) . '","' . anti_inj($position) . '","' . anti_inj($real) . '","' . anti_inj($hentai) . '");
         ';
 
 $result = mysqli_query($sqllink, $sql);
