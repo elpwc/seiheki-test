@@ -39,10 +39,10 @@
 
 <div class="box">
   <!--性癖标题-->
-  <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data?.title.length)) * 3}px; color: ${data?.level < 5 ? '#333' : '#FFF'}`}>{data?.title}</p>
+  <p class="title" style={`font-size: ${~~(440 / (8 + 3 * data?.title.length)) * 3}px; color: ${data?.level < 4 ? '#333' : '#FFF'}`}>{data?.title}</p>
 
   <!--性癖说明-->
-  <p class="quote-p" style={`color: ${data?.level < 5 ? '#333' : '#FFF'}`}>
+  <p class="quote-p" style={`color: ${data?.level < 4 ? '#333' : '#FFF'}`}>
     {#if data?.description !== ''}
       <span class="quote">“</span>
       <span class="desc">{data?.description}</span>
