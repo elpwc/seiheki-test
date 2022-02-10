@@ -15,11 +15,22 @@
 
   let userRecords: UserRecord[] = [];
 
+  /** 刷新排行榜数据 */
+  const refreshRank = async () => {
+    const res: UserRecord[] = (await getRecords({ realType: 1 })) as UserRecord[];
+    if (res) {
+      // 去掉php错误返回
+      if (typeof res?.[0] !== 'object') {
+        userRecords = [];
+      } else {
+        userRecords = res;
+      }
+    }
+  };
+
   onMount(async () => {
     const res = await getRecords({ realType: 1 });
-    if (res) {
-      userRecords = res;
-    }
+    refreshRank();
   });
 </script>
 
