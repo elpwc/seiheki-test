@@ -24,7 +24,7 @@
 </script>
 
 <Modal
-  width="80%"
+  width="95%"
   okButtonText="已阅"
   showOkButton
   onOKButtonClick={() => {
