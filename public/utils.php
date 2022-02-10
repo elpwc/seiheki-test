@@ -31,7 +31,7 @@ function cator_to_cn_censorship($text)
 {
     $res = $text;
     foreach (ILLEGAL_LIST as $word) {
-        $res = str_ireplace($word, str_repeat('*', strlen($word)), $res);
+        $res = str_ireplace($word, str_repeat('*', mb_strlen($word)), $res);
     }
     return $res;
 }
