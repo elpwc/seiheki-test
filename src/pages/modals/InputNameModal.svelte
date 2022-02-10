@@ -28,9 +28,10 @@
   }}
   visible={inputNameModalVisibility}
   onFlyOutEnd={afterClose}
+  title="请输入名字，用于排行榜喵"
 >
   <div style="padding: 15px 0;">
-    <input bind:value={name} placeholder="请输入名字，用于排行榜喵" /><br />
+    <input bind:value={name} placeholder="不文明的词会被吃掉喵" /><br />
     <p style="display:flex; justify-content:center;">
       <label class="checkboxtext"><input type="checkbox" bind:checked />我是根据自己的真实认知进行选择的</label>
     </p>

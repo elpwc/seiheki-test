@@ -25,13 +25,13 @@ function anti_inj($text)
 }
 
 /**
- * ***
+ * 和谐
  */
 function cator_to_cn_censorship($text)
 {
     $res = $text;
     foreach (ILLEGAL_LIST as $word) {
-        $res = str_ireplace('$word', '', $res);
+        $res = str_ireplace($word, str_repeat('*', strlen($word)), $res);
     }
     return $res;
 }
