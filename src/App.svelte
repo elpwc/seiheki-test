@@ -356,10 +356,10 @@
     font-size: 20px;
     font-weight: bold;
     color: rgba(255, 255, 255, 100);
+    display: flex;
+    align-items: center;
   }
 
-  .bg {
-  }
   .tipbox {
     position: fixed;
     right: -250px;
