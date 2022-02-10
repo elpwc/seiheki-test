@@ -125,6 +125,12 @@
     </p>
   </div>
 
+  <!--
+    TODO:
+    显示 段位，还有hentai等级(根据选择的高等级的xp的占比)
+
+  -->
+
   <!--个性化涩图-->
   <p>根据你的喜好，为你准备了一些涩图</p>
   <Button on:click={onSeeSetuClick}>查看涩图</Button>
