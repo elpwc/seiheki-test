@@ -149,6 +149,7 @@
 <style>
   .score_container {
     height: 100px;
+    position: relative;
   }
   .score {
     font-size: 5em;
