@@ -2,19 +2,74 @@
   "config": {
     "level": 2,
     "title": "勇者",
-    "desc": "在社会上部分存在，但会被部分庶民评价为变态的程度的xp",
+    "desc": "在社会上存在，但会被部分庶民评价为变态的程度的xp",
     "color": "#c9ba47"
   },
   "template": [{ "title": "", "score": 0, "desc": "" }],
   "seihekis": [
     {
-      "title": "待完成",
+      "title": "炼铜",
       "score": 1,
       "desc": ""
     },
     {
+      "title": "野战",
+      "score": 1,
+      "desc": ""
+    },
+    {
+      "title": "福睿",
+      "score": 2,
+      "desc": "睿体，很奇妙罢。"
+    },
+    {
       "title": "",
       "score": 2,
+      "desc": ""
+    },
+    {
+      "title": "轻度殴打",
+      "score": 2,
+      "desc": ""
+    },
+    {
+      "title": "露出",
+      "score": 2,
+      "desc": ""
+    },
+    {
+      "title": "药渍",
+      "score": 2,
+      "desc": ""
+    },
+    {
+      "title": "妹妹",
+      "score": 1,
+      "desc": ""
+    },
+    {
+      "title": "榨精",
+      "score": 2,
+      "desc": ""
+    },
+    {
+      "title": "榨乳",
+      "score": 1,
+      "desc": ""
+    },
+    {
+      "title": "双穴",
+      "score": 2,
+      "desc": ""
+    },
+    {
+      "title": "灌肠",
+      "score": 1,
+      "desc": ""
+    },
+    {
+      "title": "姐姐",
+      "score": 1,
       "desc": ""
     }
   ]

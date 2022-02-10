@@ -8,14 +8,19 @@
   "template": [{ "title": "", "score": 0, "desc": "" }],
   "seihekis": [
     {
-      "title": "",
+      "title": "腹击",
       "score": 1,
       "desc": ""
     },
     {
-      "title": "",
+      "title": "电击",
       "score": 2,
       "desc": ""
+    },
+    {
+      "title": "欠损",
+      "score": 2,
+      "desc": "就是残疾，但不见血"
     }
   ]
 }

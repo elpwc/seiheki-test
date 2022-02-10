@@ -2,20 +2,25 @@
   "config": {
     "level": 5,
     "title": "?????",
-    "desc": "包含了重度Guro，几乎让任何一个人都会感到恶心的程度的xp",
+    "desc": "包含了重度Guro，几乎让任何一个人都会感到恶心的程度的xp口区",
     "color": "#150101"
   },
   "template": [{ "title": "", "score": 0, "desc": "" }],
   "seihekis": [
     {
-      "title": "",
+      "title": "斩首",
       "score": 1,
       "desc": ""
     },
     {
-      "title": "",
+      "title": "四肢切断",
       "score": 2,
       "desc": ""
+    },
+    {
+      "title": "烹饪",
+      "score": 2,
+      "desc": "就是汉尼拔的说"
     }
   ]
 }
