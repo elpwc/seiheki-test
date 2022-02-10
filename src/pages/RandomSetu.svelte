@@ -13,7 +13,7 @@
   /** 显示的涩图对象 */
   let image: Types.Setu | undefined = undefined;
   /** 输入框中的tags */
-  let tags: string = '贫乳,足';
+  let tags: string = '贫乳';
   /** r18类型 0：R15 1:R18 0:Mix */
   let r18type: 0 | 1 | 2 = 0;
 
@@ -89,12 +89,13 @@
         currentPage_s.set('home');
       }}>返回主页</button
     >
-    <input bind:value={tags} placeholder="这里输入xp,可用逗号隔开输入多个" />
+    <input bind:value={tags} placeholder="输入xp,可用逗号隔开多个" />
     <button
       on:click={() => {
         refreshImage();
-      }}>GET SETU</button
-    >
+      }}
+      ><b>GET SETU</b>
+    </button>
 
     <div style="display:flex; justify-content:center; gap: 10px;">
       <label><input type="radio" bind:group={r18type} value={0} />R15</label>
